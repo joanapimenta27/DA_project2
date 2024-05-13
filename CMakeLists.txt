@@ -10,6 +10,8 @@ add_executable(Project2_DA main.cpp
         Interface.cpp
         Interface.h
         Printer.h
-        FileParser.cpp
-        FileParser.h
-        FileParser.h)
+        DeliveryManager.cpp
+        DeliveryManager.h
+        DeliveryManager.h
+        Parser.cpp
+        Parser.h)
