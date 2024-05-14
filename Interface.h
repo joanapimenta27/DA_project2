@@ -17,6 +17,7 @@
 #include <thread>
 #include <stack>
 #include <unordered_map>
+#include "DeliveryManager.h"
 
 
 /**
@@ -52,11 +53,15 @@ private:
 
     std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> converter;
     std::thread manThread;
+    std::shared_ptr<DeliveryManager> dev_man;
 
     int location = 0;
     int page = 0;
     int elements_per_page = 10;
-
+    std::string data_choice;
+    std::string edge_choice;
+    std::string vertex_file;
+    std::string edge_file;
     unsigned long selected = 0;
     unsigned long selected_in_page = 0;
 
@@ -92,98 +97,43 @@ private:
     std::vector<std::vector<std::wstring>> options{
             {
                 L"Choose DataSet",
-                L"Credits",
                 L"Quit"
             },
             {
-                L"Change Name",
-                L"Main Menu"
+                L"Toy-Graphs",
+                L"Extra_Fully_Connected_Graphs",
+                L"Real-world Graphs"
+
+            },
+             {
+                L"shipping.csv",
+                L"stadiums.csv",
+                L"tourism.csv"
+
+            },
+             {
+                L"edges_25.csv",
+                L"edges_50.csv",
+                L"edges_75.csv",
+                L"edges_100.csv",
+                L"edges_200.csv",
+                L"edges_300.csv",
+                L"edges_400.csv",
+                L"edges_500.csv",
+                L"edges_600.csv",
+                L"edges_700.csv",
+                L"edges_800.csv",
+                L"edges_900.csv"
             },
             {
-                L"Portugal DataSet",
-                L"Madeira DataSet",
-                L"Main Menu"
+                L"graph1",
+                L"graph2",
+                L"graph3"
             },
             {
-                L"Portugal DataSet " + bold + blue + L" <- ACTIVE" + end_effect,
-                L"Madeira DataSet",
-                L"Proceed"
-            },
-            {
-                L"Portugal DataSet",
-                L"Madeira DataSet " + bold + blue + L" <- ACTIVE" + end_effect,
-                L"Proceed"
-            },
-            {
-                L"Basic Service Metrics",
-                L"Reliability and Sensitivity to Failures",
-                L"Choose DataSet",
                 L"Quit"
-            },
-            {
-                L"Max Amount of Water",
-                L"Cities in Deficit",
-                L"Balance Difference",
-                L"Main Menu"
-            },
-            {
-                L"Search for a City",
-                L"Total",
-                L"Back",
-                L"Main Menu"
-            },
-            {
-                L"Back",
-                L"Main Menu"
-            },
-            {
-                L"Back",
-                L"Main Menu"
-            },
-            {
-                L"Back",
-                L"Main Menu"
-            },
-            {
-                L"Reservoir Out of Commission",
-                L"Pumping Stations in Maintenance",
-                L"Pipeline Failures",
-                L"Main Menu"
-            },
-            {
-                L"Search for a Reservoir",
-                L"Back",
-                L"Main Menu"
-            },
-            {
-                L"Add One More Reservoir",
-                L"Back",
-                L"Main Menu"
-            },
-            {
-                L"Search for a Pumping Station",
-                L"Back",
-                L"Main Menu"
-            },
-            {
-                L"Add One More Pumping Station",
-                L"Back",
-                L"Main Menu"
-            },
-            {
-                L"Search for a Pipe",
-                L"Back",
-                L"Main Menu"
-            },
-            {
-                L"Add One More Pipe",
-                L"Back",
-                L"Main Menu"
-            },
-            {
-                L"Back",
-                L"Main Menu"
             }
+
     };
 
     std::vector<std::wstring> helpers{
@@ -195,14 +145,10 @@ private:
             L"  You selected Madeira DataSet"
     };
 
-    std::vector<std::wstring> waterSupplyManagement = {
-            L" --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ",
-            L"| ██     ██  █████  ████████ ███████ ██████      ███████ ██    ██ ██████  ██████  ██     ██    ██     ███    ███  █████  ███    ██  █████   ██████  ███████ ███    ███ ███████ ███    ██ ████████   |",
-            L"| ██     ██ ██   ██    ██    ██      ██   ██     ██      ██    ██ ██   ██ ██   ██ ██      ██  ██      ████  ████ ██   ██ ████   ██ ██   ██ ██       ██      ████  ████ ██      ████   ██    ██      |",
-            L"| ██  █  ██ ███████    ██    █████   ██████      ███████ ██    ██ ██████  ██████  ██       ████       ██ ████ ██ ███████ ██ ██  ██ ███████ ██   ███ █████   ██ ████ ██ █████   ██ ██  ██    ██      |",
-            L"| ██ ███ ██ ██   ██    ██    ██      ██   ██          ██ ██    ██ ██      ██      ██        ██        ██  ██  ██ ██   ██ ██  ██ ██ ██   ██ ██    ██ ██      ██  ██  ██ ██      ██  ██ ██    ██      |",
-            L"|  ███ ███  ██   ██    ██    ███████ ██   ██     ███████  ██████  ██      ██      ██████    ██        ██      ██ ██   ██ ██   ████ ██   ██  ██████  ███████ ██      ██ ███████ ██   ████    ██      |",
-            L" --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ",
+    std::vector<std::wstring> deliveryManagement = {
+            L" ---------------------",
+            L"| Delivery Management |",
+            L" ---------------------",
     };
 
     void inputer();

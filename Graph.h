@@ -34,6 +34,8 @@ public:
     T getInfo() const;
     std::vector<Edge<T> *> getAdj() const;
     bool isVisited() const;
+    double getLongitude() const;
+    double getLatitude() const;
     bool isProcessing() const;
     unsigned int getIndegree() const;
     double getDist() const;
@@ -41,6 +43,8 @@ public:
     std::vector<Edge<T> *> getIncoming() const;
 
     void setInfo(T info);
+    void setLongitude(double l);
+    void setLatitude(double l);
     void setVisited(bool visited);
     void setProcesssing(bool processing);
     void setIndegree(unsigned int indegree);
@@ -238,6 +242,16 @@ T Vertex<T>::getInfo() const {
 }
 
 template <class T>
+double Vertex<T>::getLongitude() const {
+    return this->longitude;
+}
+
+template <class T>
+double Vertex<T>::getLatitude() const {
+    return this->latitude;
+}
+
+template <class T>
 std::vector<Edge<T>*> Vertex<T>::getAdj() const {
     return this->adj;
 }
@@ -275,6 +289,16 @@ std::vector<Edge<T> *> Vertex<T>::getIncoming() const {
 template <class T>
 void Vertex<T>::setInfo(T in) {
     this->info = in;
+}
+
+template <class T>
+void Vertex<T>::setLongitude(double l) {
+    this->longitude= l;
+}
+
+template <class T>
+void Vertex<T>::setLatitude(double l) {
+    this->latitude= l;
 }
 
 template <class T>
