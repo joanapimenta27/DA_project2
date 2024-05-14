@@ -4,18 +4,17 @@
 
 #include "DeliveryManager.h"
 
-DeliveryManager::DeliveryManager(std::string choice)
+DeliveryManager::DeliveryManager(std::string vertex_file, std::string edge_file):deliveryGraph_(std::make_unique<Graph<int>>())
 {
 
-    Parser nodes("../dataset/");
-    Parser edges("../dataset");
-
+    Parser nodes(vertex_file);
+    Parser edges(edge_file);
 
 
     for (std::vector<std::string> line : nodes.getData()){
-        deliveryGraph->addVertex(std::stoi(line.at(0)));
-        deliveryGraph->findVertex(std::stoi(line.at(0)))->setLongitude(std::stod(line.at(1)));
-        deliveryGraph->findVertex(std::stoi(line.at(0)))->setLatitude(std::stod(line.at(2)));
+        deliveryGraph_->addVertex(std::stoi(line.at(0)));
+        deliveryGraph_->findVertex(std::stoi(line.at(0)))->setLongitude(std::stod(line.at(1)));
+        deliveryGraph_->findVertex(std::stoi(line.at(0)))->setLatitude(std::stod(line.at(2)));
     }
 
     for (std::vector<std::string> line : edges.getData()){
@@ -23,7 +22,11 @@ DeliveryManager::DeliveryManager(std::string choice)
         int dest =std::stoi(line.at(1));
         double distance= std::stod(line.at(2));
 
-        deliveryGraph->addEdge(orig,dest,distance);
+        deliveryGraph_->addEdge(orig,dest,distance);
 
     }
+}
+
+const std::unique_ptr<Graph<int>> &DeliveryManager::getDeliveryGraph() const{
+    return deliveryGraph_;
 }

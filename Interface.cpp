@@ -11,6 +11,13 @@
 Interface::Interface()= default;
 
 void Interface::refreshDirectories() {
+    directories.clear();
+    directories.emplace_back(L"");
+    directories.emplace_back(L"Choose DataSet");
+    directories.emplace_back(L"Choose DataSet");
+    directories.emplace_back(L"Choose DataSet");
+    directories.emplace_back(L"Choose DataSet");
+    directories.emplace_back(converter.from_bytes(data_choice)+L" "+converter.from_bytes(edge_choice));
 
 }
 
@@ -273,7 +280,53 @@ void Interface::basicInputResponse(unsigned int user_in) {
     if (user_in == '\n') {
         switch (location) {
 
-                break;
+            case 0:       //============================= MAIN MENU ===============================//
+                switch (selected) {
+                    case 0:
+                        enterInputHandler(1, 0, false, false, false);
+                    break;
+                    case 1:
+                        location = -1;
+                    break;
+                }
+            break;
+            case 1:
+                switch (selected) {
+                    case 0:
+                        data_choice=converter.to_bytes(options[location][selected]);
+                        enterInputHandler(2, 0, false, false, false);
+                    break;
+                    case 1:
+                        data_choice=converter.to_bytes(options[location][selected]);
+                        enterInputHandler(3, 0, false, false, false);
+                    break;
+                    case 2:
+                        data_choice=converter.to_bytes(options[location][selected]);
+                        enterInputHandler(4, 0, false, false, false);
+                    break;
+                }
+            break;
+            case 3:
+                switch (selected) {
+                    default:
+                        edge_choice=converter.to_bytes(options[location][selected]);
+                        edge_file="../dataset/"+data_choice+"/"+edge_choice;
+                        vertex_file="../dataset/"+data_choice+"/nodes.csv";
+                        enterInputHandler(5, 0, false, false, false);
+                        break;
+                }
+            break;
+            case 4:
+                switch (selected) {
+                    default:
+                        edge_choice=converter.to_bytes(options[location][selected]);
+                        edge_file="../dataset/"+data_choice+"/"+edge_choice+"/edges.csv";
+                        vertex_file="../dataset/"+data_choice+"/"+edge_choice+"/nodes.csv";
+                        enterInputHandler(5, 0, false, false, false);
+                        break;
+                }
+            break;
+
         }
     }
 }
@@ -297,10 +350,41 @@ void Interface::run(){
 
         switch (location) {
             case 0:
+                printBoldTitle(deliveryManagement);
                 printOptions(options[location],selected,false);
+                printHelper(helpers, {0});
                 inputer();
                 break;
+            case 1:
+                printDirectory(directory);
+                printOptions(options[location],selected,false);
+                printHelper(helpers, {0});
+                inputer();
+                break;
+            case 2:
+                printOptions(options[location],selected,false);
+                printHelper(helpers, {0});
+                inputer();
+                break;
+
+            case 3:
+                printOptions(options[location],selected,false);
+                printHelper(helpers, {0});
+                inputer();
+                break;
+            case 4:
+                printOptions(options[location],selected,false);
+                printHelper(helpers, {0});
+                inputer();
+                break;
+            case 5:
+                printDirectory(directory);
+                dev_man=std::make_shared<DeliveryManager>(vertex_file,edge_file);
+
+                inputer();
+
         }
+
     }
 
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt); //restore old terminal

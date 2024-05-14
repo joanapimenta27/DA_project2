@@ -2,8 +2,8 @@
 // Created by joana on 14-05-2024.
 //
 
-#ifndef FILEPARSER_H
-#define FILEPARSER_H
+#ifndef DELIVERYMANAGER_H
+#define DELIVERYMANAGER_H
 
 #include <memory>
 
@@ -13,13 +13,15 @@
 class DeliveryManager{
 
 private:
-    std::unique_ptr<Graph<int>> deliveryGraph;
+    std::unique_ptr<Graph<int>> deliveryGraph_;
 
 
 public:
-    DeliveryManager(std::string choice);
+    DeliveryManager(std::string data_choice, std::string edge_choice);
+
+    const std::unique_ptr<Graph<int>> &getDeliveryGraph() const;
 };
 
 
 
-#endif //FILEPARSER_H
+#endif //DELIVERYMANAGER_H
