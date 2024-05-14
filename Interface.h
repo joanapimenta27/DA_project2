@@ -106,7 +106,10 @@ private:
 
             },
              {
-                L"Toy-Graphs"
+                L"shipping.csv",
+                L"stadiums.csv",
+                L"tourism.csv"
+
             },
              {
                 L"edges_25.csv",

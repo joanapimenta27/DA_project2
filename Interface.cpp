@@ -306,6 +306,18 @@ void Interface::basicInputResponse(unsigned int user_in) {
                     break;
                 }
             break;
+            case 2:
+                switch (selected) {
+                    default:
+                        edge_choice=converter.to_bytes(options[location][selected]);
+                        edge_file="";
+                        vertex_file="../dataset/"+data_choice+"/"+edge_choice;
+                        enterInputHandler(5, 0, false, false, false);
+                    break;
+                }
+
+
+            break;
             case 3:
                 switch (selected) {
                     default:
@@ -380,7 +392,6 @@ void Interface::run(){
             case 5:
                 printDirectory(directory);
                 dev_man=std::make_shared<DeliveryManager>(vertex_file,edge_file);
-
                 inputer();
 
         }
