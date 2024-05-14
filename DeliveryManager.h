@@ -5,10 +5,19 @@
 #ifndef FILEPARSER_H
 #define FILEPARSER_H
 
+#include <memory>
+
+#include "Graph.h"
+#include "Parser.h"
+
+class DeliveryManager{
+
+private:
+    std::unique_ptr<Graph<int>> deliveryGraph;
 
 
-class FileParser {
-
+public:
+    DeliveryManager(std::string choice);
 };
 
 

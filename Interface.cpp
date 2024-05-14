@@ -296,7 +296,10 @@ void Interface::run(){
         system("clear");
 
         switch (location) {
-            break;
+            case 0:
+                printOptions(options[location],selected,false);
+                inputer();
+                break;
         }
     }
 

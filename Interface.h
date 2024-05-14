@@ -92,7 +92,6 @@ private:
     std::vector<std::vector<std::wstring>> options{
             {
                 L"Choose DataSet",
-                L"Credits",
                 L"Quit"
             },
             {
