@@ -3,7 +3,8 @@
 //
 
 #include "DeliveryManager.h"
-
+#include "time.h"
+#include <chrono>
 #include <climits>
 
 DeliveryManager::DeliveryManager(std::string vertex_file, std::string edge_file):deliveryGraph_(std::make_unique<Graph<int>>())
@@ -83,14 +84,19 @@ void DeliveryManager::backtrack_tsp(std::unique_ptr<Graph<int>>& g,int vis, Vert
     }
 }
 
-double DeliveryManager::backtracking(std::unique_ptr<Graph<int>>& g) {
+std::pair<double, double> DeliveryManager::backtracking(std::unique_ptr<Graph<int>>& g) {
+    auto start=std::chrono::high_resolution_clock::now();
+    std::ios_base::sync_with_stdio(false);
     double res=INT_MAX;
     for(Vertex<int> * v : g->getVertexSet()) {
         v->setVisited(false);
     }
     g->findVertex(0)->setVisited(true);
     backtrack_tsp(g,1,g->findVertex(0),res,0);
-    return res;
+    auto end=std::chrono::high_resolution_clock::now();
+    double res_t=std::chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
+    res_t*=1e-9;
+    return  std::make_pair(res,res_t);
 
 }
 

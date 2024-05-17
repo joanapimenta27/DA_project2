@@ -62,6 +62,7 @@ private:
     std::string edge_choice;
     std::string vertex_file;
     std::string edge_file;
+    std::pair<double,double> backtrack_res;
     unsigned long selected = 0;
     unsigned long selected_in_page = 0;
 
@@ -136,10 +137,16 @@ private:
             },
             {
                 L"Change DataSet",
+                L"Cost using Backtracking",
                 L"Back",
                 L"Quit"
 
-            }
+            },
+            {
+                    L"Back",
+                    L"Quit"
+
+                }
 
     };
 
