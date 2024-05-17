@@ -9,17 +9,22 @@
 
 #include "Graph.h"
 #include "Parser.h"
+#include "Haversine.h"
 
 class DeliveryManager{
 
 private:
-    std::unique_ptr<Graph<int>> deliveryGraph_;
+    std::unique_ptr<Graph<int>> deliveryGraph_  ;
 
 
 public:
     DeliveryManager(std::string data_choice, std::string edge_choice);
 
-    const std::unique_ptr<Graph<int>> &getDeliveryGraph() const;
+    std::unique_ptr<Graph<int>>& getDeliveryGraph() ;
+
+    double backtracking(std::unique_ptr<Graph<int>>& g);
+
+    void backtrack_tsp(std::unique_ptr<Graph<int>>& g,int vis, Vertex<int>* v,double& res,double cost);
 };
 
 

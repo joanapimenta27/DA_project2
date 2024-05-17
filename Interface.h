@@ -102,13 +102,15 @@ private:
             {
                 L"Toy-Graphs",
                 L"Extra_Fully_Connected_Graphs",
-                L"Real-world Graphs"
+                L"Real-world Graphs",
+                L"Back"
 
             },
              {
                 L"shipping.csv",
                 L"stadiums.csv",
-                L"tourism.csv"
+                L"tourism.csv",
+                 L"Back"
 
             },
              {
@@ -123,15 +125,20 @@ private:
                 L"edges_600.csv",
                 L"edges_700.csv",
                 L"edges_800.csv",
-                L"edges_900.csv"
+                L"edges_900.csv",
+                 L"Back",
             },
             {
                 L"graph1",
                 L"graph2",
-                L"graph3"
+                L"graph3",
+                L"Back"
             },
             {
+                L"Change DataSet",
+                L"Back",
                 L"Quit"
+
             }
 
     };
