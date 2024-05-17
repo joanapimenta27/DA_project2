@@ -22,7 +22,7 @@ public:
 
     std::unique_ptr<Graph<int>>& getDeliveryGraph() ;
 
-    double backtracking(std::unique_ptr<Graph<int>>& g);
+    std::pair<double,double> backtracking(std::unique_ptr<Graph<int>>& g);
 
     void backtrack_tsp(std::unique_ptr<Graph<int>>& g,int vis, Vertex<int>* v,double& res,double cost);
 };

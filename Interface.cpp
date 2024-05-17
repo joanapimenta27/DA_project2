@@ -18,7 +18,7 @@ void Interface::refreshDirectories() {
     directories.emplace_back(L"Choose DataSet");
     directories.emplace_back(L"Choose DataSet");
     directories.emplace_back(converter.from_bytes(data_choice)+L" "+converter.from_bytes(edge_choice));
-
+    directories.emplace_back(L"Cost using Backtracking");
 }
 
 void Interface::stackClear(std::stack<int> &s){
@@ -359,15 +359,30 @@ void Interface::basicInputResponse(unsigned int user_in) {
                         enterInputHandler(1, 0, false, false, false);
                     break;
                     case 1:
-                        enterInputHandler(0, 0, true, false, false);
+                        enterInputHandler(6,0,false,false,false);
+                        backtrack_res=dev_man->backtracking(dev_man->getDeliveryGraph());
                     break;
                     case 2:
+                        enterInputHandler(0, 0, true, false, false);
+                    break;
+                    case 3:
                         location = -1;
                     break;
 
 
                 }
             break;
+            case 6:
+                switch (selected) {
+                    case 0:
+                        enterInputHandler(0, 0, true, false, false);
+                    break;
+                    case 1:
+                        location = -1;
+                    break;
+
+
+                }
 
         }
     }
@@ -424,10 +439,19 @@ void Interface::run(){
                 break;
             case 5:
                 printDirectory(directory);
-               // std::wcout<<dev_man->backtracking(dev_man->getDeliveryGraph());
                 printOptions(options[location],selected,false);
                 printHelper(helpers, {0});
                 inputer();
+                break;
+            case 6:
+                printDirectory(directory);
+                printMonoInfo(L"The cost of the tour of the TSP for this dataset using Backtracking is "+bold +converter.from_bytes(std::to_string(backtrack_res.first))+end_effect);
+                printMonoInfo(L"Execution time :" + bold +converter.from_bytes(std::to_string(backtrack_res.second)) + L"s"+ end_effect);
+                printOptions(options[location],selected,false);
+                printHelper(helpers,{0});
+                inputer();
+
+                break;
 
         }
 
