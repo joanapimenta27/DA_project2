@@ -12,6 +12,7 @@ add_executable(Project2_DA main.cpp
         Printer.h
         DeliveryManager.cpp
         DeliveryManager.h
-        DeliveryManager.h
         Parser.cpp
-        Parser.h)
+        Parser.h
+        Haversine.cpp
+        Haversine.h)

@@ -304,15 +304,22 @@ void Interface::basicInputResponse(unsigned int user_in) {
                         data_choice=converter.to_bytes(options[location][selected]);
                         enterInputHandler(4, 0, false, false, false);
                     break;
+                    case 3:
+                        enterInputHandler(0, 0, true, false, false);
+                    break;
                 }
             break;
             case 2:
                 switch (selected) {
+                    case 3:
+                        enterInputHandler(0, 0, true, false, false);
+                    break;
                     default:
                         edge_choice=converter.to_bytes(options[location][selected]);
                         edge_file="";
                         vertex_file="../dataset/"+data_choice+"/"+edge_choice;
                         enterInputHandler(5, 0, false, false, false);
+                        dev_man=std::make_shared<DeliveryManager>(vertex_file,edge_file);
                     break;
                 }
 
@@ -320,22 +327,45 @@ void Interface::basicInputResponse(unsigned int user_in) {
             break;
             case 3:
                 switch (selected) {
+                    case 12:
+                        enterInputHandler(0, 0, true, false, false);
+                    break;
                     default:
                         edge_choice=converter.to_bytes(options[location][selected]);
-                        edge_file="../dataset/"+data_choice+"/"+edge_choice;
-                        vertex_file="../dataset/"+data_choice+"/nodes.csv";
+                        vertex_file="../dataset/"+data_choice+"/"+edge_choice;
+                        edge_file="";
                         enterInputHandler(5, 0, false, false, false);
+                        dev_man=std::make_shared<DeliveryManager>(vertex_file,edge_file);
                         break;
                 }
             break;
             case 4:
                 switch (selected) {
+                    case 3:
+                        enterInputHandler(0, 0, true, false, false);
+                    break;
                     default:
                         edge_choice=converter.to_bytes(options[location][selected]);
                         edge_file="../dataset/"+data_choice+"/"+edge_choice+"/edges.csv";
                         vertex_file="../dataset/"+data_choice+"/"+edge_choice+"/nodes.csv";
                         enterInputHandler(5, 0, false, false, false);
+                        dev_man=std::make_shared<DeliveryManager>(vertex_file,edge_file);
                         break;
+                }
+            break;
+            case 5:
+                switch (selected) {
+                    case 0:
+                        enterInputHandler(1, 0, false, false, false);
+                    break;
+                    case 1:
+                        enterInputHandler(0, 0, true, false, false);
+                    break;
+                    case 2:
+                        location = -1;
+                    break;
+
+
                 }
             break;
 
@@ -374,24 +404,29 @@ void Interface::run(){
                 inputer();
                 break;
             case 2:
+                printDirectory(directory);
                 printOptions(options[location],selected,false);
                 printHelper(helpers, {0});
                 inputer();
                 break;
 
             case 3:
+                printDirectory(directory);
                 printOptions(options[location],selected,false);
                 printHelper(helpers, {0});
                 inputer();
                 break;
             case 4:
+                printDirectory(directory);
                 printOptions(options[location],selected,false);
                 printHelper(helpers, {0});
                 inputer();
                 break;
             case 5:
                 printDirectory(directory);
-                dev_man=std::make_shared<DeliveryManager>(vertex_file,edge_file);
+               // std::wcout<<dev_man->backtracking(dev_man->getDeliveryGraph());
+                printOptions(options[location],selected,false);
+                printHelper(helpers, {0});
                 inputer();
 
         }

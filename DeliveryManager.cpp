@@ -4,6 +4,8 @@
 
 #include "DeliveryManager.h"
 
+#include <climits>
+
 DeliveryManager::DeliveryManager(std::string vertex_file, std::string edge_file):deliveryGraph_(std::make_unique<Graph<int>>())
 {
     if(edge_file=="") {
@@ -38,14 +40,58 @@ DeliveryManager::DeliveryManager(std::string vertex_file, std::string edge_file)
         for (std::vector<std::string> line : edges.getData()){
             int orig =std::stoi(line.at(0));
             int dest =std::stoi(line.at(1));
+            int in_orig = deliveryGraph_->findVertex(orig)->getIndegree();
+            in_orig++;
+            deliveryGraph_->findVertex(orig)->setIndegree(in_orig);
+            int in_dest = deliveryGraph_->findVertex(dest)->getIndegree();
+            in_dest++;
+            deliveryGraph_->findVertex(dest)->setIndegree(in_dest);
+
             double distance= std::stod(line.at(2));
 
             deliveryGraph_->addBidirectionalEdge(orig,dest,distance);
+        }
+    }
+}
+
+std::unique_ptr<Graph<int> > &DeliveryManager::getDeliveryGraph() {
+    return deliveryGraph_;
+}
+
+
+void DeliveryManager::backtrack_tsp(std::unique_ptr<Graph<int>>& g,int vis, Vertex<int>* v,double& res,double cost) {
+    if(vis==g->getVertexSet().size()) {
+        for(Edge<int>* e: v->getAdj()) {
+            if(e->getDest()->getInfo()==0) {
+                res=std::min(res,e->getWeight()+cost);
+            }
+        }
+        return;
+
+    }
+    for(Edge<int>* e: v->getAdj()) {
+        Vertex<int>* dest=e->getDest();
+
+        if(!dest->isVisited()) {
+            dest->setVisited(true);
+            vis++;
+            backtrack_tsp(g,vis,dest,res,cost+e->getWeight());
+            dest->setVisited(false);
+            vis--;
 
         }
     }
 }
 
-const std::unique_ptr<Graph<int>> &DeliveryManager::getDeliveryGraph() const{
-    return deliveryGraph_;
+double DeliveryManager::backtracking(std::unique_ptr<Graph<int>>& g) {
+    double res=INT_MAX;
+    for(Vertex<int> * v : g->getVertexSet()) {
+        v->setVisited(false);
+    }
+    g->findVertex(0)->setVisited(true);
+    backtrack_tsp(g,1,g->findVertex(0),res,0);
+    return res;
+
 }
+
+
