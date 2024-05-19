@@ -1,4 +1,3 @@
-
 #ifndef DA_TP_CLASSES_GRAPH
 #define DA_TP_CLASSES_GRAPH
 
@@ -34,8 +33,6 @@ public:
     T getInfo() const;
     std::vector<Edge<T> *> getAdj() const;
     bool isVisited() const;
-    double getLongitude() const;
-    double getLatitude() const;
     bool isProcessing() const;
     unsigned int getIndegree() const;
     double getDist() const;
@@ -43,9 +40,11 @@ public:
     std::vector<Edge<T> *> getIncoming() const;
 
     void setInfo(T info);
-    void setLongitude(double l);
-    void setLatitude(double l);
     void setVisited(bool visited);
+    void setLatitude(double l);
+    double getLatitude();
+    double getLongitude();
+    void setLongitude(double l);
     void setProcesssing(bool processing);
     void setIndegree(unsigned int indegree);
     void setDist(double dist);
@@ -64,8 +63,8 @@ protected:
     bool processing = false; // used by isDAG (in addition to the visited attribute)
     unsigned int indegree; // used by topsort
     double dist = 0;
-    double longitude=0;
-    double latitude=0;
+    double  longitude;
+    double  latitude;
     Edge<T> *path = nullptr;
 
     std::vector<Edge<T> *> incoming; // incoming edges
@@ -133,6 +132,7 @@ public:
     /*
     * Auxiliary function to find a vertex with a given the content.
     */
+    std::vector<Vertex<T> *> vertexSet;    // vertex set
     Vertex<T> *findVertex(const T &in) const;
     /*
      *  Adds a vertex with a given content or info (in) to a graph (this).
@@ -163,7 +163,7 @@ public:
     std::vector<T> topsort() const;
 
 protected:
-    std::vector<Vertex<T> *> vertexSet;    // vertex set
+
 
     double ** distMatrix = nullptr;   // dist matrix for Floyd-Warshall
     int **pathMatrix = nullptr;   // path matrix for Floyd-Warshall
@@ -242,16 +242,6 @@ T Vertex<T>::getInfo() const {
 }
 
 template <class T>
-double Vertex<T>::getLongitude() const {
-    return this->longitude;
-}
-
-template <class T>
-double Vertex<T>::getLatitude() const {
-    return this->latitude;
-}
-
-template <class T>
 std::vector<Edge<T>*> Vertex<T>::getAdj() const {
     return this->adj;
 }
@@ -260,6 +250,23 @@ template <class T>
 bool Vertex<T>::isVisited() const {
     return this->visited;
 }
+template<class T>
+void Vertex<T>::setLatitude(double l) {
+    latitude=l;
+}
+template<class T>
+void Vertex<T>::setLongitude(double l) {
+    longitude=l;
+}
+template<class T>
+double Vertex<T>::getLatitude() {
+    return latitude;
+}
+template<class T>
+double Vertex<T>::getLongitude() {
+    return longitude;
+}
+
 
 template <class T>
 bool Vertex<T>::isProcessing() const {
@@ -289,16 +296,6 @@ std::vector<Edge<T> *> Vertex<T>::getIncoming() const {
 template <class T>
 void Vertex<T>::setInfo(T in) {
     this->info = in;
-}
-
-template <class T>
-void Vertex<T>::setLongitude(double l) {
-    this->longitude= l;
-}
-
-template <class T>
-void Vertex<T>::setLatitude(double l) {
-    this->latitude= l;
 }
 
 template <class T>
