@@ -64,6 +64,7 @@ std::unique_ptr<Graph<int> > &DeliveryManager::getDeliveryGraph() {
 }
 
 
+
 void DeliveryManager::backtrack_tsp(std::unique_ptr<Graph<int>>& g,int vis, Vertex<int>* v,double& res,double cost) {
     if(vis==g->getVertexSet().size()) {
         for(Edge<int>* e: v->getAdj()) {
@@ -76,14 +77,15 @@ void DeliveryManager::backtrack_tsp(std::unique_ptr<Graph<int>>& g,int vis, Vert
     }
     for(Edge<int>* e: v->getAdj()) {
         Vertex<int>* dest=e->getDest();
-
+        double newcost=cost+e->getWeight();
         if(!dest->isVisited()) {
-            dest->setVisited(true);
-            vis++;
-            backtrack_tsp(g,vis,dest,res,cost+e->getWeight());
-            dest->setVisited(false);
-            vis--;
-
+            if(newcost<res) {
+                dest->setVisited(true);
+                vis++;
+                backtrack_tsp(g,vis,dest,res,newcost);
+                dest->setVisited(false);
+                vis--;
+            }
         }
     }
 }
@@ -103,7 +105,6 @@ std::pair<double, double> DeliveryManager::backtracking(std::unique_ptr<Graph<in
     return  std::make_pair(res,res_t);
 
 }
-
 
 std::vector<int> DeliveryManager::mstPrim(std::unique_ptr<Graph<int>>& g) {
     std::vector<int> pre(g->getVertexSet().size(), -1);
