@@ -5,59 +5,7 @@
 #include "DeliveryManager.h"
 #include <chrono>
 #include <climits>
-#include <set>
-
-#include "Haversine.h"
-
-
-DeliveryManager::DeliveryManager(std::string vertex_file, std::string edge_file):deliveryGraph_(std::make_unique<Graph<int>>()),vertex_(std::unordered_map<int, Vertex<int>*,vert_struct>())
-{
-    if(edge_file=="") {
-        Parser edges(vertex_file);
-
-        for (std::vector<std::string> line : edges.getData()){
-            if(vertex_.find(std::stoi(line.at(0)))==nullptr){
-                vertex_.insert({std::stoi(line.at(0)),new Vertex<int>(std::stoi(line.at(0)))});
-                deliveryGraph_->vertexSet.push_back(vertex_[std::stoi(line.at(0))]);
-
-            }
-            if(vertex_.find(std::stoi(line.at(1)))==nullptr){
-                vertex_.insert({std::stoi(line.at(1)),new Vertex<int>(std::stoi(line.at(1)))});
-                deliveryGraph_->vertexSet.push_back(vertex_[std::stoi(line.at(1))]);
-
-            }
-            int orig =std::stoi(line.at(0));
-            int dest =std::stoi(line.at(1));
-            double distance= std::stod(line.at(2));
-
-            vertex_[orig]->addEdge(vertex_[dest],distance);
-            vertex_[dest]->addEdge(vertex_[orig],distance);
-        }
-
-    }
-    else {
-        Parser nodes(vertex_file);
-        Parser edges(edge_file);
-
-
-        for (std::vector<std::string> line : nodes.getData()){
-            vertex_.insert({std::stoi(line.at(0)),new Vertex<int>(std::stoi(line.at(0)))});
-            deliveryGraph_->vertexSet.push_back(vertex_[std::stoi(line.at(0))]);
-            vertex_[std::stoi(line.at(0))]->setLongitude(std::stod(line.at(1)));
-            vertex_[std::stoi(line.at(0))]->setLatitude(std::stod(line.at(2)));
-        }
-
-        for (std::vector<std::string> line : edges.getData()){
-            int orig =std::stoi(line.at(0));
-            int dest =std::stoi(line.at(1));
-
-            double distance= std::stod(line.at(2));
-
-            vertex_[orig]->addEdge(vertex_[dest],distance);
-            vertex_[dest]->addEdge(vertex_[orig],distance);
-        }
-    }
-}
+#include <stack>
 
 
 std::unique_ptr<Graph<int> > &DeliveryManager::getDeliveryGraph() {
@@ -77,15 +25,14 @@ void DeliveryManager::backtrack_tsp(std::unique_ptr<Graph<int>>& g,int vis, Vert
     }
     for(Edge<int>* e: v->getAdj()) {
         Vertex<int>* dest=e->getDest();
-        double newcost=cost+e->getWeight();
+
         if(!dest->isVisited()) {
-            if(newcost<res) {
-                dest->setVisited(true);
-                vis++;
-                backtrack_tsp(g,vis,dest,res,newcost);
-                dest->setVisited(false);
-                vis--;
-            }
+            dest->setVisited(true);
+            vis++;
+            backtrack_tsp(g,vis,dest,res,cost+e->getWeight());
+            dest->setVisited(false);
+            vis--;
+
         }
     }
 }
@@ -231,7 +178,145 @@ std::pair<double,double> DeliveryManager::tsp2Approximation(std::unique_ptr<Grap
 
 
 
+/*In this approach, you are asked to implement another heuristic of your choice to solve the TSP again
+starting and ending the node tour on node with the zero-identifier label. The emphasis in this approach
+should be on efficiency as this algorithm should be feasible even for the large graphs. Here you can make
+use of several algorithmic techniques from the use of divide-and-conquer to splitting the graph into multiple
+geographic sections to the use of clustering, or both, possibly even in combination with the 2-
+approximation algorithm. In the end, you are strongly suggested to compare the quality and run-time
+performance of your heuristic solution against the 2-approximation algorithm. You are expected to present
+only one heuristic that works well over the basic Triangular approximation or one that offers comparable
+tour length results but with noticeably faster execution time (i.e., time complexity). You should avoid
+investing a tremendous effort in developing an heuristic that yields marginal gains. It is also important to
+demonstrate what gains you achieved with your heuristic, so, during the presentation, a comparative analysis
+between the backtracking, the triangular approximation and your algorithm should be shown.
+Once again, in order to directly compare your results with the triangular approximation heuristic, you should
+assume that all given graphs are fully connected and use the Haversine distance to compute the weights
+of the edges that are not explicitly described in the dataset, thus making the graph fully connected.
+ */
 
+// Created by joana on 14-05-2024.
 
+// Find odd degree vertices in MST
+std::vector<Vertex<int>*> DeliveryManager::findOddDegreeVertices(std::unique_ptr<Graph<int>>& g, const std::vector<int>& mst) {
+    std::unordered_map<int, int> degreeCount;
+    for(int i = 0; i < mst.size(); ++i) {
+        if(mst[i] != -1) {
+            degreeCount[i]++;
+            degreeCount[mst[i]]++;
+        }
+    }
+    std::vector<Vertex<int>*> oddVertices;
+    for(auto& pair : degreeCount) {
+        if(pair.second % 2 == 1) {
+            oddVertices.push_back(g->findVertex(pair.first));
+        }
+    }
+    return oddVertices;
+}
+
+// Minimum Weight Perfect Matching using a naive approach (for simplicity)
+std::vector<std::pair<Vertex<int>*, Vertex<int>*>> DeliveryManager::minimumWeightPerfectMatching(std::vector<Vertex<int>*>& oddVertices) {
+    std::vector<std::pair<Vertex<int>*, Vertex<int>*>> matching;
+    for(int i = 0; i < oddVertices.size(); ++i) {
+        double minDistance = std::numeric_limits<double>::max();
+        Vertex<int>* closestVertex = nullptr;
+        for(int j = 0; j < oddVertices.size(); ++j) {
+            if(i != j) {
+                double distance = calculate_distance(oddVertices[i]->getLatitude(), oddVertices[i]->getLongitude(), oddVertices[j]->getLatitude(), oddVertices[j]->getLongitude());
+                if(distance < minDistance) {
+                    minDistance = distance;
+                    closestVertex = oddVertices[j];
+                }
+            }
+        }
+        matching.push_back({oddVertices[i], closestVertex});
+    }
+    return matching;
+}
+
+// Combine MST and MWPM to form Eulerian graph
+std::vector<Edge<int>*> DeliveryManager::combineMSTandMWPM(const std::vector<Edge<int>*>& mstEdges, const std::vector<Edge<int>*>& mwpmEdges) {
+    std::vector<Edge<int>*> eulerianEdges;
+    for(auto& edge : mstEdges) {
+        eulerianEdges.push_back(edge);
+    }
+    for(auto& edge : mwpmEdges) {
+        eulerianEdges.push_back(edge);
+    }
+    return eulerianEdges;
+}
+
+// Eulerian Circuit using Hierholzer's Algorithm
+std::vector<int> DeliveryManager::eulerianCircuit(std::unique_ptr<Graph<int>>& g, const std::vector<Edge<int>*>& eulerianEdges) {
+    std::unordered_map<int, std::vector<int>> adjList;
+    for(auto& edge : eulerianEdges) {
+        adjList[edge->getOrig()->getInfo()].push_back(edge->getDest()->getInfo());
+    }
+    std::vector<int> circuit;
+    std::stack<int> stack;
+    int currentVertex = 0;
+    stack.push(currentVertex);
+    while(!stack.empty()) {
+        if(adjList[currentVertex].empty()) {
+            circuit.push_back(currentVertex);
+            currentVertex = stack.top();
+            stack.pop();
+        } else {
+            stack.push(currentVertex);
+            int nextVertex = adjList[currentVertex].back();
+            adjList[currentVertex].pop_back();
+            currentVertex = nextVertex;
+        }
+    }
+    return circuit;
+}
+
+double DeliveryManager::calculateTSPPath(const std::vector<int>& eulerianCircuit, std::unique_ptr<Graph<int>>& g) {
+    std::vector<bool> visited(eulerianCircuit.size(), false);
+    double cost = 0.0;
+    int prev = eulerianCircuit[0];
+    visited[prev] = true;
+
+    for(size_t i = 1; i < eulerianCircuit.size(); ++i) {
+        int current = eulerianCircuit[i];
+        if(!visited[current]) {
+            visited[current] = true;
+            cost += calculate_distance(g->findVertex(prev)->getLatitude(), g->findVertex(prev)->getLongitude(),
+                                       g->findVertex(current)->getLatitude(), g->findVertex(current)->getLongitude());
+            prev = current;
+        }
+    }
+    cost += calculate_distance(g->findVertex(prev)->getLatitude(), g->findVertex(prev)->getLongitude(),
+                               g->findVertex(0)->getLatitude(), g->findVertex(0)->getLongitude());
+    return cost;
+}
+
+// Heuristic approach to solve TSP
+double DeliveryManager::heuristicTSP(std::unique_ptr<Graph<int>>& g) {
+    std::vector<int> mstPredecessors = mstPrim(g);
+
+    std::vector<Edge<int>*> mstEdges;
+    for(size_t i = 0; i < mstPredecessors.size(); ++i) {
+        if(mstPredecessors[i] != -1) {
+            mstEdges.push_back(new Edge<int>(g->findVertex(i), g->findVertex(mstPredecessors[i]),
+                                             calculate_distance(g->findVertex(i)->getLatitude(), g->findVertex(i)->getLongitude(),
+                                                                g->findVertex(mstPredecessors[i])->getLatitude(), g->findVertex(mstPredecessors[i])->getLongitude())));
+        }
+    }
+
+    std::vector<Vertex<int>*> oddVertices = findOddDegreeVertices(g, mstPredecessors);
+    std::vector<std::pair<Vertex<int>*, Vertex<int>*>> mwpmVertices = minimumWeightPerfectMatching(oddVertices);
+    std::vector<Edge<int>*> mwpmEdges;
+    for(auto& pair : mwpmVertices) {
+        mwpmEdges.push_back(new Edge<int>(pair.first, pair.second,
+                                          calculate_distance(pair.first->getLatitude(), pair.first->getLongitude(),
+                                                             pair.second->getLatitude(), pair.second->getLongitude())));
+    }
+
+    std::vector<Edge<int>*> eulerianEdges = combineMSTandMWPM(mstEdges, mwpmEdges);
+    std::vector<int> eulerianCircuit1 = eulerianCircuit(g, eulerianEdges);
+    return calculateTSPPath(eulerianCircuit1, g);
+}
 
 
