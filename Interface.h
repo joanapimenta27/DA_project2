@@ -63,6 +63,7 @@ private:
     std::string vertex_file;
     std::string edge_file;
     std::pair<double,double> backtrack_res;
+    std::pair<double,double> approximation_res;
     unsigned long selected = 0;
     unsigned long selected_in_page = 0;
 
@@ -138,6 +139,7 @@ private:
             {
                 L"Change DataSet",
                 L"Cost using Backtracking",
+                L"Cost using Approximation",
                 L"Back",
                 L"Quit"
 
@@ -146,7 +148,12 @@ private:
                     L"Back",
                     L"Quit"
 
-                }
+                },
+            {
+                L"Back",
+                L"Quit"
+
+            }
 
     };
 
@@ -155,8 +162,7 @@ private:
             L"  You can use 'tab' to change to the table, and 'ENTER' to select one",
             L"  You can use 'n' and 'p' to go to the next and previous page of the table respectively",
             L"  Choose your DataSet",
-            L"  You selected Portugal DataSet",
-            L"  You selected Madeira DataSet"
+
     };
 
     std::vector<std::wstring> deliveryManagement = {

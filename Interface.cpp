@@ -19,6 +19,7 @@ void Interface::refreshDirectories() {
     directories.emplace_back(L"Choose DataSet");
     directories.emplace_back(converter.from_bytes(data_choice)+L" "+converter.from_bytes(edge_choice));
     directories.emplace_back(L"Cost using Backtracking");
+    directories.emplace_back(L"Cost using Approximation");
 }
 
 void Interface::stackClear(std::stack<int> &s){
@@ -363,9 +364,13 @@ void Interface::basicInputResponse(unsigned int user_in) {
                         backtrack_res=dev_man->backtracking(dev_man->getDeliveryGraph());
                     break;
                     case 2:
-                        enterInputHandler(0, 0, true, false, false);
+                        enterInputHandler(7,0,false,false,false);
+                        approximation_res=dev_man->tsp2Approximation(dev_man->getDeliveryGraph());
                     break;
                     case 3:
+                        enterInputHandler(0, 0, true, false, false);
+                    break;
+                    case 4:
                         location = -1;
                     break;
 
@@ -383,6 +388,19 @@ void Interface::basicInputResponse(unsigned int user_in) {
 
 
                 }
+            break;
+            case 7:
+                switch (selected) {
+                    case 0:
+                        enterInputHandler(0, 0, true, false, false);
+                    break;
+                    case 1:
+                        location = -1;
+                    break;
+
+
+                }
+            break;
 
         }
     }
@@ -445,13 +463,20 @@ void Interface::run(){
                 break;
             case 6:
                 printDirectory(directory);
-                printMonoInfo(L"The cost of the tour of the TSP for this dataset using Backtracking is "+bold +converter.from_bytes(std::to_string(backtrack_res.first))+end_effect);
+                printMonoInfo(L"The cost using Backtracking is "+bold +converter.from_bytes(std::to_string(backtrack_res.first))+end_effect);
                 printMonoInfo(L"Execution time :" + bold +converter.from_bytes(std::to_string(backtrack_res.second)) + L"s"+ end_effect);
                 printOptions(options[location],selected,false);
                 printHelper(helpers,{0});
                 inputer();
 
                 break;
+            case 7:
+                printDirectory(directory);
+                printMonoInfo(L"The cost using Approximation is "+bold +converter.from_bytes(std::to_string(approximation_res.first))+end_effect);
+                printMonoInfo(L"Execution time :" + bold +converter.from_bytes(std::to_string(approximation_res.second)) + L"s"+ end_effect);
+                printOptions(options[location],selected,false);
+                printHelper(helpers,{0});
+                inputer();
 
         }
 

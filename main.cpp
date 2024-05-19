@@ -2,8 +2,8 @@
 #include "Interface.h"
 
 int main()
-{   DeliveryManager delivery_manager("../dataset/Toy-Graphs/stadiums.csv","");
-    std::cout<<delivery_manager.tsp2Approximation(delivery_manager.getDeliveryGraph());
+{   //DeliveryManager delivery_manager("../dataset/Toy-Graphs/stadiums.csv","");
+    //std::cout<<delivery_manager.tsp2Approximation(delivery_manager.getDeliveryGraph());
     /*auto e=delivery_manager.tsp2Approximation(delivery_manager.getDeliveryGraph());
     for(auto a:e) {
         for(auto m:a) {
@@ -11,12 +11,12 @@ int main()
         }
         std::cout<<" | ";
     }
-
+    */
 
     Interface inter;
     inter.run();
 
-
+    /*
     DeliveryManager delivery_manager("../dataset/Toy-Graphs/tourism.csv","");
     std::priority_queue<int,std::vector<int>,std::greater<int>> V;
 

@@ -9,23 +9,29 @@
 
 #include "Haversine.h"
 
-DeliveryManager::DeliveryManager(std::string vertex_file, std::string edge_file):deliveryGraph_(std::make_unique<Graph<int>>())
+
+DeliveryManager::DeliveryManager(std::string vertex_file, std::string edge_file):deliveryGraph_(std::make_unique<Graph<int>>()),vertex_(std::unordered_map<int, Vertex<int>*,vert_struct>())
 {
     if(edge_file=="") {
         Parser edges(vertex_file);
 
         for (std::vector<std::string> line : edges.getData()){
-            if(deliveryGraph_->findVertex(std::stoi(line.at(0)))==nullptr){
-                deliveryGraph_->addVertex(std::stoi(line.at(0)));
+            if(vertex_.find(std::stoi(line.at(0)))==nullptr){
+                vertex_.insert({std::stoi(line.at(0)),new Vertex<int>(std::stoi(line.at(0)))});
+                deliveryGraph_->vertexSet.push_back(vertex_[std::stoi(line.at(0))]);
+
             }
-            if(deliveryGraph_->findVertex(std::stoi(line.at(1)))==nullptr){
-                deliveryGraph_->addVertex(std::stoi(line.at(1)));
+            if(vertex_.find(std::stoi(line.at(1)))==nullptr){
+                vertex_.insert({std::stoi(line.at(1)),new Vertex<int>(std::stoi(line.at(1)))});
+                deliveryGraph_->vertexSet.push_back(vertex_[std::stoi(line.at(1))]);
+
             }
             int orig =std::stoi(line.at(0));
             int dest =std::stoi(line.at(1));
             double distance= std::stod(line.at(2));
 
-            deliveryGraph_->addBidirectionalEdge(orig,dest,distance);
+            vertex_[orig]->addEdge(vertex_[dest],distance);
+            vertex_[dest]->addEdge(vertex_[orig],distance);
         }
 
     }
@@ -35,27 +41,24 @@ DeliveryManager::DeliveryManager(std::string vertex_file, std::string edge_file)
 
 
         for (std::vector<std::string> line : nodes.getData()){
-            deliveryGraph_->addVertex(std::stoi(line.at(0)));
-            deliveryGraph_->findVertex(std::stoi(line.at(0)))->setLongitude(std::stod(line.at(1)));
-            deliveryGraph_->findVertex(std::stoi(line.at(0)))->setLatitude(std::stod(line.at(2)));
+            vertex_.insert({std::stoi(line.at(0)),new Vertex<int>(std::stoi(line.at(0)))});
+            deliveryGraph_->vertexSet.push_back(vertex_[std::stoi(line.at(0))]);
+            vertex_[std::stoi(line.at(0))]->setLongitude(std::stod(line.at(1)));
+            vertex_[std::stoi(line.at(0))]->setLatitude(std::stod(line.at(2)));
         }
 
         for (std::vector<std::string> line : edges.getData()){
             int orig =std::stoi(line.at(0));
             int dest =std::stoi(line.at(1));
-            int in_orig = deliveryGraph_->findVertex(orig)->getIndegree();
-            in_orig++;
-            deliveryGraph_->findVertex(orig)->setIndegree(in_orig);
-            int in_dest = deliveryGraph_->findVertex(dest)->getIndegree();
-            in_dest++;
-            deliveryGraph_->findVertex(dest)->setIndegree(in_dest);
 
             double distance= std::stod(line.at(2));
 
-            deliveryGraph_->addBidirectionalEdge(orig,dest,distance);
+            vertex_[orig]->addEdge(vertex_[dest],distance);
+            vertex_[dest]->addEdge(vertex_[orig],distance);
         }
     }
 }
+
 
 std::unique_ptr<Graph<int> > &DeliveryManager::getDeliveryGraph() {
     return deliveryGraph_;
@@ -185,16 +188,12 @@ Edge<int> * DeliveryManager::findEdge(std::unique_ptr<Graph<int>>& g,const int &
     return nullptr;
 }
 
-std::set<int> DeliveryManager::transformPrim(std::vector<std::vector<int>> v ) {
-    std::set<int> s;
-
-    return s;
-
-}
 
 
-double DeliveryManager::tsp2Approximation(std::unique_ptr<Graph<int>>& g) {
+std::pair<double,double> DeliveryManager::tsp2Approximation(std::unique_ptr<Graph<int>>& g) {
         double cost=0;
+        auto start=std::chrono::high_resolution_clock::now();
+        std::ios_base::sync_with_stdio(false);
         std::vector<int> res;
         std::vector<std::vector<int>> ans;
         std::vector<int> pri =mstPrim(g);
@@ -222,11 +221,10 @@ double DeliveryManager::tsp2Approximation(std::unique_ptr<Graph<int>>& g) {
                 prev=aft;
             }
         }
-
-
-
-
-    return cost;
+    auto end=std::chrono::high_resolution_clock::now();
+    double res_t=std::chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
+    res_t*=1e-9;
+    return  std::make_pair(cost,res_t);
 
 }
 
