@@ -8,6 +8,57 @@
 #include <stack>
 
 
+DeliveryManager::DeliveryManager(std::string vertex_file, std::string edge_file):deliveryGraph_(std::make_unique<Graph<int>>()),vertex_(std::unordered_map<int, Vertex<int>*,vert_struct>())
+{
+    if(edge_file=="") {
+        Parser edges(vertex_file);
+
+        for (std::vector<std::string> line : edges.getData()){
+            if(vertex_.find(std::stoi(line.at(0)))==nullptr){
+                vertex_.insert({std::stoi(line.at(0)),new Vertex<int>(std::stoi(line.at(0)))});
+                deliveryGraph_->vertexSet.push_back(vertex_[std::stoi(line.at(0))]);
+
+            }
+            if(vertex_.find(std::stoi(line.at(1)))==nullptr){
+                vertex_.insert({std::stoi(line.at(1)),new Vertex<int>(std::stoi(line.at(1)))});
+                deliveryGraph_->vertexSet.push_back(vertex_[std::stoi(line.at(1))]);
+
+            }
+            int orig =std::stoi(line.at(0));
+            int dest =std::stoi(line.at(1));
+            double distance= std::stod(line.at(2));
+
+            vertex_[orig]->addEdge(vertex_[dest],distance);
+            vertex_[dest]->addEdge(vertex_[orig],distance);
+        }
+
+    }
+    else {
+        Parser nodes(vertex_file);
+        Parser edges(edge_file);
+
+
+        for (std::vector<std::string> line : nodes.getData()){
+            vertex_.insert({std::stoi(line.at(0)),new Vertex<int>(std::stoi(line.at(0)))});
+            deliveryGraph_->vertexSet.push_back(vertex_[std::stoi(line.at(0))]);
+            vertex_[std::stoi(line.at(0))]->setLongitude(std::stod(line.at(1)));
+            vertex_[std::stoi(line.at(0))]->setLatitude(std::stod(line.at(2)));
+        }
+
+        for (std::vector<std::string> line : edges.getData()){
+            int orig =std::stoi(line.at(0));
+            int dest =std::stoi(line.at(1));
+
+            double distance= std::stod(line.at(2));
+
+            vertex_[orig]->addEdge(vertex_[dest],distance);
+            vertex_[dest]->addEdge(vertex_[orig],distance);
+        }
+    }
+}
+
+
+
 std::unique_ptr<Graph<int> > &DeliveryManager::getDeliveryGraph() {
     return deliveryGraph_;
 }
