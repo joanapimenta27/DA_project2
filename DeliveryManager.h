@@ -11,13 +11,25 @@
 #include "Parser.h"
 #include "Haversine.h"
 
+
 class DeliveryManager{
+public:
+    struct vert_struct {
+        int operator()(int v) const {
+            return  v;
+        }
+        bool operator()(const int& v1, const int& v2) const {
+            return v1==v2;
+        }
+    };
 
 private:
+
+    std::unordered_map<int, Vertex<int>*,vert_struct>vertex_;
     std::unique_ptr<Graph<int>> deliveryGraph_  ;
 
-
 public:
+
     DeliveryManager(std::string data_choice, std::string edge_choice);
 
     std::unique_ptr<Graph<int>>& getDeliveryGraph() ;
