@@ -6,6 +6,7 @@
 #define DELIVERYMANAGER_H
 
 #include <memory>
+#include <set>
 
 #include "Graph.h"
 #include "Parser.h"
@@ -25,6 +26,18 @@ public:
     std::pair<double,double> backtracking(std::unique_ptr<Graph<int>>& g);
 
     void backtrack_tsp(std::unique_ptr<Graph<int>>& g,int vis, Vertex<int>* v,double& res,double cost);
+
+    double tsp2Approximation(std::unique_ptr<Graph<int>>& g);
+
+    std::vector<int> mstPrim(std::unique_ptr<Graph<int>>& g);
+
+    std::set<int> transformPrim(std::vector<std::vector<int>> v );
+
+    void dfsPrim(std::unique_ptr<Graph<int>>& g,int v,std::vector<int>& res,std::vector<int> prim);
+
+    void updateQueue( std::priority_queue<std::pair<double, Vertex<int>*>, std::vector<std::pair<double, Vertex<int>*>>, std::greater<std::pair<double, Vertex<int>*>>>& V,double w, Vertex<int>* v);
+
+    Edge<int> * findEdge(std::unique_ptr<Graph<int>>& g,const int &in,const int &dest);
 };
 
 

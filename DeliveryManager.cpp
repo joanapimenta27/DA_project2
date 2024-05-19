@@ -5,6 +5,9 @@
 #include "DeliveryManager.h"
 #include <chrono>
 #include <climits>
+#include <set>
+
+#include "Haversine.h"
 
 DeliveryManager::DeliveryManager(std::string vertex_file, std::string edge_file):deliveryGraph_(std::make_unique<Graph<int>>())
 {
@@ -71,14 +74,15 @@ void DeliveryManager::backtrack_tsp(std::unique_ptr<Graph<int>>& g,int vis, Vert
     }
     for(Edge<int>* e: v->getAdj()) {
         Vertex<int>* dest=e->getDest();
-
+        double newcost=cost+e->getWeight();
         if(!dest->isVisited()) {
-            dest->setVisited(true);
-            vis++;
-            backtrack_tsp(g,vis,dest,res,cost+e->getWeight());
-            dest->setVisited(false);
-            vis--;
-
+            if(newcost<res) {
+                dest->setVisited(true);
+                vis++;
+                backtrack_tsp(g,vis,dest,res,newcost);
+                dest->setVisited(false);
+                vis--;
+            }
         }
     }
 }
@@ -98,5 +102,138 @@ std::pair<double, double> DeliveryManager::backtracking(std::unique_ptr<Graph<in
     return  std::make_pair(res,res_t);
 
 }
+
+
+std::vector<int> DeliveryManager::mstPrim(std::unique_ptr<Graph<int>>& g) {
+    std::vector<int> pre(g->getVertexSet().size(), -1);
+    std::vector<double> key(g->getVertexSet().size(), INT_MAX);
+    std::priority_queue<std::pair<double, Vertex<int>*>, std::vector<std::pair<double, Vertex<int>*>>, std::greater<std::pair<double, Vertex<int>*>>> V;
+
+    for(Vertex<int>* v :g->getVertexSet()) {
+        if(v->getInfo()==0) {
+            V.emplace(0,v);
+            key[0]=0;
+            v->setVisited(true);
+        }
+        else {
+            V.emplace(INT_MAX,v);
+            v->setVisited(false);
+        }
+
+    }
+
+    while(!V.empty()) {
+        std::pair<double,Vertex<int>*> tp=V.top();
+        V.pop();
+        Vertex<int>* u=tp.second;
+        u->setVisited(true);
+
+        for(Edge<int>* e:u->getAdj()) {
+            Vertex<int>* dest=e->getDest();
+            double w=e->getWeight();
+            if(!dest->isVisited()&& w<key[dest->getInfo()]) {
+                pre[dest->getInfo()]=u->getInfo();
+                key[dest->getInfo()]=w;
+                updateQueue(V,w,dest);
+            }
+        }
+    }
+    return pre;
+}
+
+void DeliveryManager::updateQueue( std::priority_queue<std::pair<double, Vertex<int>*>, std::vector<std::pair<double, Vertex<int>*>>, std::greater<std::pair<double, Vertex<int>*>>>& V,double w,Vertex<int>* v) {
+    std::vector<std::pair<double,Vertex<int>*>> tmp;
+    while(!V.empty()) {
+       std::pair<double,Vertex<int>*> tp=V.top();
+        if(tp.second==v) {
+            tp.first=w;
+        }
+        V.pop();
+        tmp.push_back(tp);
+    }
+
+    for(std::pair<double,Vertex<int>*>& t:tmp) {
+        V.push(t);
+    }
+}
+
+void DeliveryManager::dfsPrim(std::unique_ptr<Graph<int>>& g,int v,std::vector<int>& res,std::vector<int> prim) {
+    if(!g->findVertex(v)->isVisited()) {
+        g->findVertex(v)->setVisited(true);
+        bool flag=true;
+        res.push_back(v);
+        for(int i=0;i<prim.size();i++) {
+            if(prim[i]==v && !g->findVertex(i)->isVisited()) {
+                dfsPrim(g,i,res,prim);
+                flag=false;
+            }
+        }
+
+
+
+    }
+}
+
+Edge<int> * DeliveryManager::findEdge(std::unique_ptr<Graph<int>>& g,const int &in,const int &dest){
+    for (auto v : g->getVertexSet())
+        if (v->getInfo() == in)
+            for(auto e:v->getAdj()) {
+                if(e->getDest()->getInfo()==dest) {
+                    return e;
+                }
+            }
+    return nullptr;
+}
+
+std::set<int> DeliveryManager::transformPrim(std::vector<std::vector<int>> v ) {
+    std::set<int> s;
+
+    return s;
+
+}
+
+
+double DeliveryManager::tsp2Approximation(std::unique_ptr<Graph<int>>& g) {
+        double cost=0;
+        std::vector<int> res;
+        std::vector<std::vector<int>> ans;
+        std::vector<int> pri =mstPrim(g);
+        for(Vertex<int>* v:g->getVertexSet()) {
+            v->setVisited(false);
+        }
+
+        for(int i=0;i<pri.size();i++) {
+            dfsPrim(g,i,res,pri);
+        }
+        res.push_back(0);
+        int prev=res[0];
+        int aft;
+        for(int i=1 ;i!=res.size();i++){
+            aft=res[i];
+            if(findEdge(g, prev,aft)!=nullptr) {
+                double w=findEdge(g,prev,aft)->getWeight();
+                cost+=w;
+                prev=aft;
+            }
+            else {
+                double w=calculate_distance(g->findVertex(prev)->getLatitude(),g->findVertex(prev)->getLongitude(),g->findVertex(aft)->getLatitude(),g->findVertex(aft)->getLongitude());
+                g->addBidirectionalEdge(prev,aft,w);
+                cost+=w;
+                prev=aft;
+            }
+        }
+
+
+
+
+    return cost;
+
+}
+
+
+
+
+
+
 
 

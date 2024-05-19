@@ -404,6 +404,7 @@ std::vector<Vertex<T> *> Graph<T>::getVertexSet() const {
     return vertexSet;
 }
 
+
 /*
  * Auxiliary function to find a vertex with a given content.
  */
