@@ -1,0 +1,230 @@
+\doxysection{C\+:/\+Users/jlsmp/\+Downloads/\+DA\+\_\+project2-\/master/\+DA\+\_\+project2-\/master/\+Printer.h File Reference}
+\hypertarget{_printer_8h}{}\label{_printer_8h}\index{C:/Users/jlsmp/Downloads/DA\_project2-\/master/DA\_project2-\/master/Printer.h@{C:/Users/jlsmp/Downloads/DA\_project2-\/master/DA\_project2-\/master/Printer.h}}
+
+
+Header file containing functions for printing formatted output to the console.  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$sys/ioctl.\+h$>$}\newline
+{\ttfamily \#include $<$locale$>$}\newline
+{\ttfamily \#include $<$codecvt$>$}\newline
+{\ttfamily \#include "{}Interface.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_edge}{int}} \mbox{\hyperlink{_printer_8h_a0df620d2b30951f110cc3355f7a19af2}{get\+Punct}} (\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}} \&\mbox{\hyperlink{class_edge}{s}})
+\item 
+\mbox{\hyperlink{class_edge}{int}} \mbox{\hyperlink{_printer_8h_a5405373ba77baabd6e3eadae35452324}{get\+Terminal\+Width}} ()
+\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} \mbox{\hyperlink{_printer_8h_a5e2d4d4b07af75d6a766e58292fc6e1f}{center\+Up}} (\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} \&\mbox{\hyperlink{class_edge}{txt\+To\+Center}})
+\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} \mbox{\hyperlink{_printer_8h_a52a0809f0e24d6691ab2532d6988c281}{center\+Up\+And\+Line\+Up}} (\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} \&\mbox{\hyperlink{class_edge}{txt\+To\+Center}}, \mbox{\hyperlink{class_edge}{int}} \mbox{\hyperlink{class_edge}{line\+Up}})
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{_printer_8h_ad8d4bd386ba5823f962e23638b043ee6}{print\+Centered\+Title}} (\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} $>$ \&\mbox{\hyperlink{class_edge}{title}})
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{_printer_8h_a7449754255235d411417bdf37d88eab5}{print\+Text\+Loading\+Data}} ()
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{_printer_8h_adabd61b95cb5ca41acdd2a38a267589d}{print\+Bold\+Title}} (\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} $>$ \&\mbox{\hyperlink{class_edge}{title}})
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{_printer_8h_a523af50677eb001278bd6ab19efb2668}{print\+Options}} (\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} $>$ \&options, \mbox{\hyperlink{class_edge}{unsigned}} \mbox{\hyperlink{class_edge}{long}} selected, \mbox{\hyperlink{class_edge}{bool}} table\+\_\+mode)
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{_printer_8h_a8ea421acc326202b892774beb7771199}{print\+Directory}} (\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} \&directory)
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{_printer_8h_a43b2c966427f89bf1ee7112751a52122}{print\+Helper}} (\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} $>$ helpers, \mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \&\mbox{\hyperlink{class_edge}{selections}})
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{_printer_8h_a5317acdb0009f8df53f970f26020f4e2}{print\+Mono\+Info}} (\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} \&\mbox{\hyperlink{class_edge}{wstr}})
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{_printer_8h_a41c3dbe5214d34ee5357b204dd05c32f}{print\+Double\+Table}} (\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}}, \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}} $>$ \&\mbox{\hyperlink{class_edge}{wstring\+\_\+list}}, \mbox{\hyperlink{class_edge}{int}} page, \mbox{\hyperlink{class_edge}{int}} elements\+\_\+per\+\_\+page, \mbox{\hyperlink{class_edge}{unsigned}} \mbox{\hyperlink{class_edge}{long}} selected\+\_\+in\+\_\+page, \mbox{\hyperlink{class_edge}{bool}} table\+\_\+mode)
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{_printer_8h_a59e5798a4445dfb76efd20a6dbf68352}{print\+Table}} (\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} $>$ \&\mbox{\hyperlink{class_edge}{wstring\+\_\+list}}, \mbox{\hyperlink{class_edge}{int}} page, \mbox{\hyperlink{class_edge}{int}} elements\+\_\+per\+\_\+page, \mbox{\hyperlink{class_edge}{unsigned}} \mbox{\hyperlink{class_edge}{long}} selected\+\_\+in\+\_\+page, \mbox{\hyperlink{class_edge}{bool}} table\+\_\+mode)
+\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{_printer_8h_a954c45880a9b27f5004d0739837d398b}{print\+List\+Compare\+Values}} (\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}}, \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}} $>$ \mbox{\hyperlink{class_edge}{um1}}, \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}}, \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}} $>$\mbox{\hyperlink{class_edge}{um2}}, \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}}, \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}} $>$ \mbox{\hyperlink{class_edge}{city\+Name}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} \mbox{\hyperlink{_printer_8h_ab3c0eb4619de9323afe6aa25958128e1}{bg\+\_\+light\+\_\+red}} = \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{L"{}\textbackslash{}x1b}}\mbox{[}101\mbox{\hyperlink{class_edge}{m"{}}}
+\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} \mbox{\hyperlink{_printer_8h_aa604bb6629dc64572f07a7e3e2cbdda1}{end\+\_\+bg}} = \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{L"{}\textbackslash{}x1b}}\mbox{[}0m"{}
+\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} \mbox{\hyperlink{_printer_8h_a6bed4abfe2264c3cf02e06d248441013}{italic}} = \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{L"{}\textbackslash{}x1b}}\mbox{[}3\mbox{\hyperlink{class_edge}{m"{}}}
+\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} \mbox{\hyperlink{_printer_8h_af7e8a1d07850051107bc952eabc923d1}{end\+\_\+italic}} = \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{L"{}\textbackslash{}x1b}}\mbox{[}0m"{}
+\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} \mbox{\hyperlink{_printer_8h_aa0d4d05a5d9513a7acbb116247dd1a68}{red}} = \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{L"{}\textbackslash{}033}}\mbox{[}31\mbox{\hyperlink{class_edge}{m"{}}}
+\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} \mbox{\hyperlink{_printer_8h_ae43310d8bdaed03c707cde0dc7573552}{bold}} = \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{L"{}\textbackslash{}033}}\mbox{[}1\mbox{\hyperlink{class_edge}{m"{}}}
+\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} \mbox{\hyperlink{_printer_8h_a0500458a3ba0f56de4fc40c96538f464}{underline}} = \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{L"{}\textbackslash{}033}}\mbox{[}4\mbox{\hyperlink{class_edge}{m"{}}}
+\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} \mbox{\hyperlink{_printer_8h_aa4a0bfbfcd8963f153970a97b679befd}{end\+\_\+effect}} = \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{L"{}\textbackslash{}033}}\mbox{[}0m"{}
+\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring\+\_\+convert}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::codecvt\+\_\+utf8}}$<$ \mbox{\hyperlink{class_edge}{wchar\+\_\+t}} $>$, \mbox{\hyperlink{class_edge}{wchar\+\_\+t}} $>$ \mbox{\hyperlink{_printer_8h_a316e152f28b78d7fc4143560e4d0c3a1}{converter}}
+\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} $>$ $>$ \mbox{\hyperlink{_printer_8h_a1ea2b89cc356ae24a071a58b6522ae32}{loading\+Data\+Animation}}
+\item 
+\mbox{\hyperlink{class_edge}{int}} \mbox{\hyperlink{_printer_8h_ad30f972f2e6e3e5ecab0dee38ae6cdb8}{frame}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file containing functions for printing formatted output to the console. 
+
+This header file defines functions for printing various types of formatted output to the console, including loading animations, titles, options, directories, helper messages, information in a monospaced font, lists of code values, tables with double values, regular tables, and lists of compared values. It also includes color schemes and utility functions for centering text and getting terminal width. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_printer_8h_a5e2d4d4b07af75d6a766e58292fc6e1f}\label{_printer_8h_a5e2d4d4b07af75d6a766e58292fc6e1f} 
+\index{Printer.h@{Printer.h}!centerUp@{centerUp}}
+\index{centerUp@{centerUp}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{centerUp()}{centerUp()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} center\+Up (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} \&}]{txt\+To\+Center }\end{DoxyParamCaption})}
+
+\Hypertarget{_printer_8h_a52a0809f0e24d6691ab2532d6988c281}\label{_printer_8h_a52a0809f0e24d6691ab2532d6988c281} 
+\index{Printer.h@{Printer.h}!centerUpAndLineUp@{centerUpAndLineUp}}
+\index{centerUpAndLineUp@{centerUpAndLineUp}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{centerUpAndLineUp()}{centerUpAndLineUp()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} center\+Up\+And\+Line\+Up (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} \&}]{txt\+To\+Center,  }\item[{\mbox{\hyperlink{class_edge}{int}}}]{line\+Up }\end{DoxyParamCaption})}
+
+\Hypertarget{_printer_8h_a0df620d2b30951f110cc3355f7a19af2}\label{_printer_8h_a0df620d2b30951f110cc3355f7a19af2} 
+\index{Printer.h@{Printer.h}!getPunct@{getPunct}}
+\index{getPunct@{getPunct}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{getPunct()}{getPunct()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{int}} get\+Punct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}} \&}]{s }\end{DoxyParamCaption})}
+
+\Hypertarget{_printer_8h_a5405373ba77baabd6e3eadae35452324}\label{_printer_8h_a5405373ba77baabd6e3eadae35452324} 
+\index{Printer.h@{Printer.h}!getTerminalWidth@{getTerminalWidth}}
+\index{getTerminalWidth@{getTerminalWidth}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{getTerminalWidth()}{getTerminalWidth()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{int}} get\+Terminal\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{_printer_8h_adabd61b95cb5ca41acdd2a38a267589d}\label{_printer_8h_adabd61b95cb5ca41acdd2a38a267589d} 
+\index{Printer.h@{Printer.h}!printBoldTitle@{printBoldTitle}}
+\index{printBoldTitle@{printBoldTitle}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{printBoldTitle()}{printBoldTitle()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} print\+Bold\+Title (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} $>$ \&}]{title }\end{DoxyParamCaption})}
+
+\Hypertarget{_printer_8h_ad8d4bd386ba5823f962e23638b043ee6}\label{_printer_8h_ad8d4bd386ba5823f962e23638b043ee6} 
+\index{Printer.h@{Printer.h}!printCenteredTitle@{printCenteredTitle}}
+\index{printCenteredTitle@{printCenteredTitle}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{printCenteredTitle()}{printCenteredTitle()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} print\+Centered\+Title (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} $>$ \&}]{title }\end{DoxyParamCaption})}
+
+\Hypertarget{_printer_8h_a8ea421acc326202b892774beb7771199}\label{_printer_8h_a8ea421acc326202b892774beb7771199} 
+\index{Printer.h@{Printer.h}!printDirectory@{printDirectory}}
+\index{printDirectory@{printDirectory}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{printDirectory()}{printDirectory()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} print\+Directory (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} \&}]{directory }\end{DoxyParamCaption})}
+
+\Hypertarget{_printer_8h_a41c3dbe5214d34ee5357b204dd05c32f}\label{_printer_8h_a41c3dbe5214d34ee5357b204dd05c32f} 
+\index{Printer.h@{Printer.h}!printDoubleTable@{printDoubleTable}}
+\index{printDoubleTable@{printDoubleTable}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{printDoubleTable()}{printDoubleTable()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} print\+Double\+Table (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}}, \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}} $>$ \&}]{wstring\+\_\+list,  }\item[{\mbox{\hyperlink{class_edge}{int}}}]{page,  }\item[{\mbox{\hyperlink{class_edge}{int}}}]{elements\+\_\+per\+\_\+page,  }\item[{\mbox{\hyperlink{class_edge}{unsigned}} \mbox{\hyperlink{class_edge}{long}}}]{selected\+\_\+in\+\_\+page,  }\item[{\mbox{\hyperlink{class_edge}{bool}}}]{table\+\_\+mode }\end{DoxyParamCaption})}
+
+\Hypertarget{_printer_8h_a43b2c966427f89bf1ee7112751a52122}\label{_printer_8h_a43b2c966427f89bf1ee7112751a52122} 
+\index{Printer.h@{Printer.h}!printHelper@{printHelper}}
+\index{printHelper@{printHelper}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{printHelper()}{printHelper()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} print\+Helper (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} $>$}]{helpers,  }\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \&}]{selections }\end{DoxyParamCaption})}
+
+\Hypertarget{_printer_8h_a954c45880a9b27f5004d0739837d398b}\label{_printer_8h_a954c45880a9b27f5004d0739837d398b} 
+\index{Printer.h@{Printer.h}!printListCompareValues@{printListCompareValues}}
+\index{printListCompareValues@{printListCompareValues}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{printListCompareValues()}{printListCompareValues()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} print\+List\+Compare\+Values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}}, \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}} $>$}]{um1,  }\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}}, \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}} $>$}]{um2,  }\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unordered\+\_\+map}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}}, \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}} $>$}]{city\+Name }\end{DoxyParamCaption})}
+
+\Hypertarget{_printer_8h_a5317acdb0009f8df53f970f26020f4e2}\label{_printer_8h_a5317acdb0009f8df53f970f26020f4e2} 
+\index{Printer.h@{Printer.h}!printMonoInfo@{printMonoInfo}}
+\index{printMonoInfo@{printMonoInfo}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{printMonoInfo()}{printMonoInfo()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} print\+Mono\+Info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} \&}]{wstr }\end{DoxyParamCaption})}
+
+\Hypertarget{_printer_8h_a523af50677eb001278bd6ab19efb2668}\label{_printer_8h_a523af50677eb001278bd6ab19efb2668} 
+\index{Printer.h@{Printer.h}!printOptions@{printOptions}}
+\index{printOptions@{printOptions}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{printOptions()}{printOptions()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} print\+Options (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} $>$ \&}]{options,  }\item[{\mbox{\hyperlink{class_edge}{unsigned}} \mbox{\hyperlink{class_edge}{long}}}]{selected,  }\item[{\mbox{\hyperlink{class_edge}{bool}}}]{table\+\_\+mode }\end{DoxyParamCaption})}
+
+\Hypertarget{_printer_8h_a59e5798a4445dfb76efd20a6dbf68352}\label{_printer_8h_a59e5798a4445dfb76efd20a6dbf68352} 
+\index{Printer.h@{Printer.h}!printTable@{printTable}}
+\index{printTable@{printTable}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{printTable()}{printTable()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} print\+Table (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} $>$ \&}]{wstring\+\_\+list,  }\item[{\mbox{\hyperlink{class_edge}{int}}}]{page,  }\item[{\mbox{\hyperlink{class_edge}{int}}}]{elements\+\_\+per\+\_\+page,  }\item[{\mbox{\hyperlink{class_edge}{unsigned}} \mbox{\hyperlink{class_edge}{long}}}]{selected\+\_\+in\+\_\+page,  }\item[{\mbox{\hyperlink{class_edge}{bool}}}]{table\+\_\+mode }\end{DoxyParamCaption})}
+
+\Hypertarget{_printer_8h_a7449754255235d411417bdf37d88eab5}\label{_printer_8h_a7449754255235d411417bdf37d88eab5} 
+\index{Printer.h@{Printer.h}!printTextLoadingData@{printTextLoadingData}}
+\index{printTextLoadingData@{printTextLoadingData}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{printTextLoadingData()}{printTextLoadingData()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} print\+Text\+Loading\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_printer_8h_ab3c0eb4619de9323afe6aa25958128e1}\label{_printer_8h_ab3c0eb4619de9323afe6aa25958128e1} 
+\index{Printer.h@{Printer.h}!bg\_light\_red@{bg\_light\_red}}
+\index{bg\_light\_red@{bg\_light\_red}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{bg\_light\_red}{bg\_light\_red}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} bg\+\_\+light\+\_\+red = \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{L"{}\textbackslash{}x1b}}\mbox{[}101\mbox{\hyperlink{class_edge}{m"{}}}}
+
+\Hypertarget{_printer_8h_ae43310d8bdaed03c707cde0dc7573552}\label{_printer_8h_ae43310d8bdaed03c707cde0dc7573552} 
+\index{Printer.h@{Printer.h}!bold@{bold}}
+\index{bold@{bold}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{bold}{bold}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} bold = \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{L"{}\textbackslash{}033}}\mbox{[}1\mbox{\hyperlink{class_edge}{m"{}}}}
+
+\Hypertarget{_printer_8h_a316e152f28b78d7fc4143560e4d0c3a1}\label{_printer_8h_a316e152f28b78d7fc4143560e4d0c3a1} 
+\index{Printer.h@{Printer.h}!converter@{converter}}
+\index{converter@{converter}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{converter}{converter}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring\+\_\+convert}}$<$\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::codecvt\+\_\+utf8}}$<$\mbox{\hyperlink{class_edge}{wchar\+\_\+t}}$>$, \mbox{\hyperlink{class_edge}{wchar\+\_\+t}}$>$ converter}
+
+\Hypertarget{_printer_8h_aa604bb6629dc64572f07a7e3e2cbdda1}\label{_printer_8h_aa604bb6629dc64572f07a7e3e2cbdda1} 
+\index{Printer.h@{Printer.h}!end\_bg@{end\_bg}}
+\index{end\_bg@{end\_bg}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{end\_bg}{end\_bg}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} end\+\_\+bg = \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{L"{}\textbackslash{}x1b}}\mbox{[}0m"{}}
+
+\Hypertarget{_printer_8h_aa4a0bfbfcd8963f153970a97b679befd}\label{_printer_8h_aa4a0bfbfcd8963f153970a97b679befd} 
+\index{Printer.h@{Printer.h}!end\_effect@{end\_effect}}
+\index{end\_effect@{end\_effect}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{end\_effect}{end\_effect}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} end\+\_\+effect = \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{L"{}\textbackslash{}033}}\mbox{[}0m"{}}
+
+\Hypertarget{_printer_8h_af7e8a1d07850051107bc952eabc923d1}\label{_printer_8h_af7e8a1d07850051107bc952eabc923d1} 
+\index{Printer.h@{Printer.h}!end\_italic@{end\_italic}}
+\index{end\_italic@{end\_italic}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{end\_italic}{end\_italic}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} end\+\_\+italic = \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{L"{}\textbackslash{}x1b}}\mbox{[}0m"{}}
+
+\Hypertarget{_printer_8h_ad30f972f2e6e3e5ecab0dee38ae6cdb8}\label{_printer_8h_ad30f972f2e6e3e5ecab0dee38ae6cdb8} 
+\index{Printer.h@{Printer.h}!frame@{frame}}
+\index{frame@{frame}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{frame}{frame}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{int}} frame = 0}
+
+\Hypertarget{_printer_8h_a6bed4abfe2264c3cf02e06d248441013}\label{_printer_8h_a6bed4abfe2264c3cf02e06d248441013} 
+\index{Printer.h@{Printer.h}!italic@{italic}}
+\index{italic@{italic}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{italic}{italic}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} italic = \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{L"{}\textbackslash{}x1b}}\mbox{[}3\mbox{\hyperlink{class_edge}{m"{}}}}
+
+\Hypertarget{_printer_8h_a1ea2b89cc356ae24a071a58b6522ae32}\label{_printer_8h_a1ea2b89cc356ae24a071a58b6522ae32} 
+\index{Printer.h@{Printer.h}!loadingDataAnimation@{loadingDataAnimation}}
+\index{loadingDataAnimation@{loadingDataAnimation}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{loadingDataAnimation}{loadingDataAnimation}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}}$>$ $>$ loading\+Data\+Animation}
+
+\Hypertarget{_printer_8h_aa0d4d05a5d9513a7acbb116247dd1a68}\label{_printer_8h_aa0d4d05a5d9513a7acbb116247dd1a68} 
+\index{Printer.h@{Printer.h}!red@{red}}
+\index{red@{red}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{red}{red}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} red = \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{L"{}\textbackslash{}033}}\mbox{[}31\mbox{\hyperlink{class_edge}{m"{}}}}
+
+\Hypertarget{_printer_8h_a0500458a3ba0f56de4fc40c96538f464}\label{_printer_8h_a0500458a3ba0f56de4fc40c96538f464} 
+\index{Printer.h@{Printer.h}!underline@{underline}}
+\index{underline@{underline}!Printer.h@{Printer.h}}
+\doxysubsubsection{\texorpdfstring{underline}{underline}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::wstring}} underline = \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{L"{}\textbackslash{}033}}\mbox{[}4\mbox{\hyperlink{class_edge}{m"{}}}}
+

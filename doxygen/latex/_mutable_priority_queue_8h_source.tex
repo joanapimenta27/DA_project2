@@ -1,0 +1,102 @@
+\doxysection{Mutable\+Priority\+Queue.\+h}
+\hypertarget{_mutable_priority_queue_8h_source}{}\label{_mutable_priority_queue_8h_source}\index{C:/Users/jlsmp/Downloads/DA\_project2-\/master/DA\_project2-\/master/MutablePriorityQueue.h@{C:/Users/jlsmp/Downloads/DA\_project2-\/master/DA\_project2-\/master/MutablePriorityQueue.h}}
+\mbox{\hyperlink{_mutable_priority_queue_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ MutablePriorityQueue.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ A\ simple\ implementation\ of\ mutable\ priority\ queues,\ required\ by\ Dijkstra\ algorithm.}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ DA\_TP\_CLASSES\_MUTABLEPRIORITYQUEUE}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ DA\_TP\_CLASSES\_MUTABLEPRIORITYQUEUE}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_mutable_priority_queue}{MutablePriorityQueue}}\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std::vector<T\ *>}}\ H;}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ heapifyUp(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{class_edge}{i}});}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ heapifyDown(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{class_edge}{i}});}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ set(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{class_edge}{i}},\ \mbox{\hyperlink{class_edge}{T}}\ *\ \mbox{\hyperlink{class_edge}{x}});}
+\DoxyCodeLine{00022\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{class_mutable_priority_queue_aba8ebedcbe659f2680bac229cfaca526}{MutablePriorityQueue}}();}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_mutable_priority_queue_a058fc182052af82e10cc3719e448b62d}{insert}}(\mbox{\hyperlink{class_edge}{T}}\ *\ \mbox{\hyperlink{class_edge}{x}});}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{class_edge}{T}}\ *\ \mbox{\hyperlink{class_mutable_priority_queue_a3880874d7364279ac0d6d31302b28853}{extractMin}}();}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_mutable_priority_queue_a0878839cc1d2dba2b8ab2e589ecc6405}{decreaseKey}}(\mbox{\hyperlink{class_edge}{T}}\ *\ \mbox{\hyperlink{class_edge}{x}});}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_mutable_priority_queue_a2edbb1f4a6fa3ff735700dfcebebe8d4}{empty}}();}
+\DoxyCodeLine{00028\ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ Index\ calculations}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ parent(i)\ ((i)\ /\ 2)}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ leftChild(i)\ ((i)\ *\ 2)}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00035\ \mbox{\hyperlink{class_mutable_priority_queue_aba8ebedcbe659f2680bac229cfaca526}{MutablePriorityQueue<T>::MutablePriorityQueue}}()\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ H.push\_back(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//\ indices\ will\ be\ used\ starting\ in\ 1}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{comment}{//\ to\ facilitate\ parent/child\ calculations}}
+\DoxyCodeLine{00039\ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00042\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_mutable_priority_queue_a2edbb1f4a6fa3ff735700dfcebebe8d4}{MutablePriorityQueue<T>::empty}}()\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{return}\ H.size()\ ==\ 1;}
+\DoxyCodeLine{00044\ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00047\ \mbox{\hyperlink{class_edge}{T}}*\ \mbox{\hyperlink{class_mutable_priority_queue_a3880874d7364279ac0d6d31302b28853}{MutablePriorityQueue<T>::extractMin}}()\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{class_edge}{x}}\ =\ H[1];}
+\DoxyCodeLine{00049\ \ \ \ \ H[1]\ =\ H.back();}
+\DoxyCodeLine{00050\ \ \ \ \ H.pop\_back();}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{if}(H.size()\ >\ 1)\ heapifyDown(1);}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{class_edge}{x}}-\/>queueIndex\ =\ 0;}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{x}};}
+\DoxyCodeLine{00054\ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00057\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_mutable_priority_queue_a058fc182052af82e10cc3719e448b62d}{MutablePriorityQueue<T>::insert}}(\mbox{\hyperlink{class_edge}{T}}\ *\mbox{\hyperlink{class_edge}{x}})\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ H.push\_back(\mbox{\hyperlink{class_edge}{x}});}
+\DoxyCodeLine{00059\ \ \ \ \ heapifyUp(H.size()-\/1);}
+\DoxyCodeLine{00060\ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00063\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_mutable_priority_queue_a0878839cc1d2dba2b8ab2e589ecc6405}{MutablePriorityQueue<T>::decreaseKey}}(\mbox{\hyperlink{class_edge}{T}}\ *\mbox{\hyperlink{class_edge}{x}})\ \{}
+\DoxyCodeLine{00064\ \ \ \ \ heapifyUp(\mbox{\hyperlink{class_edge}{x}}-\/>queueIndex);}
+\DoxyCodeLine{00065\ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00068\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_mutable_priority_queue}{MutablePriorityQueue<T>::heapifyUp}}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{class_edge}{i}})\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{class_edge}{x}}\ =\ H[\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{i}}];}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{class_edge}{i}}\ >\ 1\ \&\&\ *\mbox{\hyperlink{class_edge}{x}}\ <\ *H[\mbox{\hyperlink{_mutable_priority_queue_8h_a915a9564b15f2c25e828da2e9a05769c}{parent}}(\mbox{\hyperlink{class_edge}{i}})])\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ set(\mbox{\hyperlink{class_edge}{i}},\ H[\mbox{\hyperlink{_mutable_priority_queue_8h_a915a9564b15f2c25e828da2e9a05769c}{parent}}(\mbox{\hyperlink{class_edge}{i}})]);}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_edge}{i}}\ =\ \mbox{\hyperlink{_mutable_priority_queue_8h_a915a9564b15f2c25e828da2e9a05769c}{parent}}(\mbox{\hyperlink{class_edge}{i}});}
+\DoxyCodeLine{00073\ \ \ \ \ \}}
+\DoxyCodeLine{00074\ \ \ \ \ set(\mbox{\hyperlink{class_edge}{i}},\ \mbox{\hyperlink{class_edge}{x}});}
+\DoxyCodeLine{00075\ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00078\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_mutable_priority_queue}{MutablePriorityQueue<T>::heapifyDown}}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{class_edge}{i}})\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{class_edge}{x}}\ =\ H[\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{i}}];}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{class_edge}{k}}\ =\ \mbox{\hyperlink{_mutable_priority_queue_8h_ac84ef3998ba958fd8abf03d08cc5ffcb}{leftChild}}(\mbox{\hyperlink{class_edge}{i}});}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_edge}{k}}\ >=\ H.size())}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_edge}{k}}+1\ <\ H.size()\ \&\&\ *H[\mbox{\hyperlink{class_edge}{k}}+1]\ <\ *H[\mbox{\hyperlink{class_edge}{k}}])}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ ++\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{k}};\ \textcolor{comment}{//\ right\ child\ of\ i}}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\ !\ (*H[\mbox{\hyperlink{class_edge}{k}}]\ <\ *\mbox{\hyperlink{class_edge}{x}})\ )}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ set(\mbox{\hyperlink{class_edge}{i}},\ H[\mbox{\hyperlink{class_edge}{k}}]);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_edge}{i}}\ =\ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{k}};}
+\DoxyCodeLine{00090\ \ \ \ \ \}}
+\DoxyCodeLine{00091\ \ \ \ \ set(\mbox{\hyperlink{class_edge}{i}},\ \mbox{\hyperlink{class_edge}{x}});}
+\DoxyCodeLine{00092\ \}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00095\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_mutable_priority_queue}{MutablePriorityQueue<T>::set}}(\textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{class_edge}{i}},\ \mbox{\hyperlink{class_edge}{T}}\ *\ \mbox{\hyperlink{class_edge}{x}})\ \{}
+\DoxyCodeLine{00096\ \ \ \ \ H[\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{i}}]\ =\ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{x}};}
+\DoxyCodeLine{00097\ \ \ \ \ \mbox{\hyperlink{class_edge}{x}}-\/>queueIndex\ =\ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{i}};}
+\DoxyCodeLine{00098\ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ DA\_TP\_CLASSES\_MUTABLEPRIORITYQUEUE\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,58 @@
+\doxysection{Parser Class Reference}
+\hypertarget{class_parser}{}\label{class_parser}\index{Parser@{Parser}}
+
+
+{\ttfamily \#include $<$Parser.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_parser_a3532565fa2a30fe3b685dbe3d84a506b}{Parser}} (\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}} \&\mbox{\hyperlink{class_edge}{f\+Name}})
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_parser}{Parser} object and opens the specified file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}} $>$ $>$ \mbox{\hyperlink{class_parser_aff00a2819257fe2a8c81eadd9bd28e0d}{get\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Reads and parses data from the file into a 2D vector of strings. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_parser_a3532565fa2a30fe3b685dbe3d84a506b}\label{class_parser_a3532565fa2a30fe3b685dbe3d84a506b} 
+\index{Parser@{Parser}!Parser@{Parser}}
+\index{Parser@{Parser}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{Parser()}{Parser()}}
+{\footnotesize\ttfamily Parser\+::\+Parser (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}} \&}]{f\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{class_parser}{Parser} object and opens the specified file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f\+Name} & The name of the file to open. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::runtime\+\_\+error}} & if the file cannot be opened. \\
+\hline
+\end{DoxyExceptions}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_parser_aff00a2819257fe2a8c81eadd9bd28e0d}\label{class_parser_aff00a2819257fe2a8c81eadd9bd28e0d} 
+\index{Parser@{Parser}!getData@{getData}}
+\index{getData@{getData}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{getData()}{getData()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}} $>$ $>$ Parser\+::get\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reads and parses data from the file into a 2D vector of strings. 
+
+\begin{DoxyReturn}{Returns}
+A 2D vector containing the parsed data. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/jlsmp/\+Downloads/\+DA\+\_\+project2-\/master/\+DA\+\_\+project2-\/master/\mbox{\hyperlink{_parser_8h}{Parser.\+h}}\item 
+C\+:/\+Users/jlsmp/\+Downloads/\+DA\+\_\+project2-\/master/\+DA\+\_\+project2-\/master/\mbox{\hyperlink{_parser_8cpp}{Parser.\+cpp}}\end{DoxyCompactItemize}
