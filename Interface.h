@@ -64,6 +64,8 @@ private:
     std::string edge_file;
     std::pair<double,double> backtrack_res;
     std::pair<double,double> approximation_res;
+    std::pair<double,double> christofile_res;
+    std::pair<double,double> real_res;
     unsigned long selected = 0;
     unsigned long selected_in_page = 0;
 
@@ -139,11 +141,23 @@ private:
             {
                 L"Change DataSet",
                 L"Cost using Backtracking",
-                L"Cost using Approximation",
+                L"Cost using Trinagular Approximation",
+                L"Cost using Christofides Approximation",
+                L"Cost using Christofides Approximation in Real Graphs",
                 L"Back",
                 L"Quit"
 
             },
+            {
+                    L"Back",
+                    L"Quit"
+
+                },
+            {
+                    L"Back",
+                    L"Quit"
+
+                },
             {
                     L"Back",
                     L"Quit"

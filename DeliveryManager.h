@@ -40,7 +40,7 @@ public:
 
     std::pair<double,double> tsp2Approximation(std::unique_ptr<Graph<int>>& g);
 
-    std::vector<int> mstPrim(std::unique_ptr<Graph<int>>& g);
+    std::vector<int> mstPrim(std::unique_ptr<Graph<int>>& g,int start);
 
     void dfsPrim(std::unique_ptr<Graph<int>>& g,int v,std::vector<int>& res,std::vector<int> prim);
 
@@ -50,15 +50,17 @@ public:
 
     std::vector<Vertex<int> *> findOddDegreeVertices(std::unique_ptr<Graph<int>> &g, const std::vector<int> &mst);
 
-    std::vector<std::pair<Vertex<int>*, Vertex<int>*>> minimumWeightPerfectMatching(std::vector<Vertex<int>*>& oddVertices);
+    std::vector<std::pair<Vertex<int>*, Edge<int>*>> minimumWeightPerfectMatching(std::vector<Vertex<int>*>& oddVertices);
 
     std::vector<Edge<int> *> combineMSTandMWPM(const std::vector<Edge<int> *> &mstEdges, const std::vector<Edge<int> *> &mwpmEdges);
 
-    double calculateTSPPath(const std::vector<int> &eulerianCircuit, std::unique_ptr<Graph<int>> &g);
+    double calculateTSPPath(const std::vector<int> &eulerianCircuit, std::unique_ptr<Graph<int>> &g,const std::vector<Edge<int>*>& eulerianEdges);
 
-    double heuristicTSP(std::unique_ptr<Graph<int>> &g);
+    std::pair<double,double> heuristicTSP(std::unique_ptr<Graph<int>> &g);
 
-    std::vector<int> eulerianCircuit(std::unique_ptr<Graph<int>> &g, const std::vector<Edge<int> *> &eulerianEdges);
+    std::vector<int> eulerianCircuit(std::unique_ptr<Graph<int>> &g, const std::vector<Edge<int> *> &eulerianEdges,int start);
+
+    std::pair<double,double> realtsp(std::unique_ptr<Graph<int>>& g, int v);
 };
 
 

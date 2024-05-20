@@ -106,15 +106,15 @@ std::pair<double, double> DeliveryManager::backtracking(std::unique_ptr<Graph<in
 
 }
 
-std::vector<int> DeliveryManager::mstPrim(std::unique_ptr<Graph<int>>& g) {
+std::vector<int> DeliveryManager::mstPrim(std::unique_ptr<Graph<int>>& g,int start) {
     std::vector<int> pre(g->getVertexSet().size(), -1);
     std::vector<double> key(g->getVertexSet().size(), INT_MAX);
     std::priority_queue<std::pair<double, Vertex<int>*>, std::vector<std::pair<double, Vertex<int>*>>, std::greater<std::pair<double, Vertex<int>*>>> V;
 
     for(Vertex<int>* v :g->getVertexSet()) {
-        if(v->getInfo()==0) {
-            V.emplace(0,v);
-            key[0]=0;
+        if(v->getInfo()==start) {
+            V.emplace(start,v);
+            key[start]=0;
             v->setVisited(true);
         }
         else {
@@ -195,7 +195,7 @@ std::pair<double,double> DeliveryManager::tsp2Approximation(std::unique_ptr<Grap
         std::ios_base::sync_with_stdio(false);
         std::vector<int> res;
         std::vector<std::vector<int>> ans;
-        std::vector<int> pri =mstPrim(g);
+        std::vector<int> pri =mstPrim(g,0);
         for(Vertex<int>* v:g->getVertexSet()) {
             v->setVisited(false);
         }
@@ -268,21 +268,39 @@ std::vector<Vertex<int>*> DeliveryManager::findOddDegreeVertices(std::unique_ptr
 }
 
 // Minimum Weight Perfect Matching using a naive approach (for simplicity)
-std::vector<std::pair<Vertex<int>*, Vertex<int>*>> DeliveryManager::minimumWeightPerfectMatching(std::vector<Vertex<int>*>& oddVertices) {
-    std::vector<std::pair<Vertex<int>*, Vertex<int>*>> matching;
+std::vector<std::pair<Vertex<int>*, Edge<int>*>> DeliveryManager::minimumWeightPerfectMatching(std::vector<Vertex<int>*>& oddVertices) {
+    std::vector<std::pair<Vertex<int>*, Edge<int>*>> matching;
     for(int i = 0; i < oddVertices.size(); ++i) {
-        double minDistance = std::numeric_limits<double>::max();
-        Vertex<int>* closestVertex = nullptr;
+        double minDistance = INT_MAX;
+        Edge<int>* edge = nullptr;
+        Edge<int>* closestEdge = nullptr;
+
         for(int j = 0; j < oddVertices.size(); ++j) {
             if(i != j) {
-                double distance = calculate_distance(oddVertices[i]->getLatitude(), oddVertices[i]->getLongitude(), oddVertices[j]->getLatitude(), oddVertices[j]->getLongitude());
+                Vertex<int>* orig=oddVertices[i];
+                Vertex<int>* dest=oddVertices[j];
+                double distance=INT_MAX;
+                bool flag=true;
+                for(auto e:orig->getAdj()) {
+                    if(e->getDest()==dest) {
+                        distance=e->getWeight();
+                        edge=e;
+                        flag=false;
+                    }
+
+                }
+                if(flag) {
+                    distance+=calculate_distance(deliveryGraph_->findVertex(orig->getInfo())->getLatitude(),deliveryGraph_->findVertex(orig->getInfo())->getLongitude(),deliveryGraph_->findVertex(dest->getInfo())->getLatitude(),deliveryGraph_->findVertex(dest->getInfo())->getLongitude());
+
+                }
+
                 if(distance < minDistance) {
                     minDistance = distance;
-                    closestVertex = oddVertices[j];
+                    closestEdge = edge;
                 }
             }
         }
-        matching.push_back({oddVertices[i], closestVertex});
+        matching.push_back({oddVertices[i], closestEdge});
     }
     return matching;
 }
@@ -300,14 +318,14 @@ std::vector<Edge<int>*> DeliveryManager::combineMSTandMWPM(const std::vector<Edg
 }
 
 // Eulerian Circuit using Hierholzer's Algorithm
-std::vector<int> DeliveryManager::eulerianCircuit(std::unique_ptr<Graph<int>>& g, const std::vector<Edge<int>*>& eulerianEdges) {
+std::vector<int> DeliveryManager::eulerianCircuit(std::unique_ptr<Graph<int>>& g, const std::vector<Edge<int>*>& eulerianEdges,int start) {
     std::unordered_map<int, std::vector<int>> adjList;
     for(auto& edge : eulerianEdges) {
         adjList[edge->getOrig()->getInfo()].push_back(edge->getDest()->getInfo());
     }
     std::vector<int> circuit;
     std::stack<int> stack;
-    int currentVertex = 0;
+    int currentVertex = start;
     stack.push(currentVertex);
     while(!stack.empty()) {
         if(adjList[currentVertex].empty()) {
@@ -324,51 +342,103 @@ std::vector<int> DeliveryManager::eulerianCircuit(std::unique_ptr<Graph<int>>& g
     return circuit;
 }
 
-double DeliveryManager::calculateTSPPath(const std::vector<int>& eulerianCircuit, std::unique_ptr<Graph<int>>& g) {
+double DeliveryManager::calculateTSPPath(const std::vector<int>& eulerianCircuit, std::unique_ptr<Graph<int>>& g,const std::vector<Edge<int>*>& eulerianEdges) {
     std::vector<bool> visited(eulerianCircuit.size(), false);
     double cost = 0.0;
     int prev = eulerianCircuit[0];
     visited[prev] = true;
+    for(auto e:deliveryGraph_->findVertex(prev)->getAdj()) {
+        if(e->getDest()->getInfo()==0) {
+            cost+=e->getWeight();
+            break;
+        }
+    }
 
     for(size_t i = 1; i < eulerianCircuit.size(); ++i) {
         int current = eulerianCircuit[i];
         if(!visited[current]) {
             visited[current] = true;
-            cost += calculate_distance(g->findVertex(prev)->getLatitude(), g->findVertex(prev)->getLongitude(),
-                                       g->findVertex(current)->getLatitude(), g->findVertex(current)->getLongitude());
+            bool flag=true;
+            for(auto e:eulerianEdges) {
+                if(e->getOrig()->getInfo()==prev) {
+                    cost+=e->getWeight();
+                    flag=false;
+                    break;
+                }
+            }
+            if(flag) {
+                cost+=calculate_distance(deliveryGraph_->findVertex(prev)->getLatitude(),deliveryGraph_->findVertex(prev)->getLongitude(),deliveryGraph_->findVertex(current)->getLatitude(),deliveryGraph_->findVertex(current)->getLongitude());
+
+            }
             prev = current;
         }
     }
-    cost += calculate_distance(g->findVertex(prev)->getLatitude(), g->findVertex(prev)->getLongitude(),
-                               g->findVertex(0)->getLatitude(), g->findVertex(0)->getLongitude());
     return cost;
 }
 
 // Heuristic approach to solve TSP
-double DeliveryManager::heuristicTSP(std::unique_ptr<Graph<int>>& g) {
-    std::vector<int> mstPredecessors = mstPrim(g);
+std::pair<double,double> DeliveryManager::heuristicTSP(std::unique_ptr<Graph<int>>& g) {
+    auto start=std::chrono::high_resolution_clock::now();
+    std::ios_base::sync_with_stdio(false);
+    std::vector<int> mstPredecessors = mstPrim(g,0);
 
     std::vector<Edge<int>*> mstEdges;
-    for(size_t i = 0; i < mstPredecessors.size(); ++i) {
-        if(mstPredecessors[i] != -1) {
-            mstEdges.push_back(new Edge<int>(g->findVertex(i), g->findVertex(mstPredecessors[i]),
-                                             calculate_distance(g->findVertex(i)->getLatitude(), g->findVertex(i)->getLongitude(),
-                                                                g->findVertex(mstPredecessors[i])->getLatitude(), g->findVertex(mstPredecessors[i])->getLongitude())));
+    for(int i=0;i<mstPredecessors.size();i++) {
+        if(mstPredecessors[i]!=-1) {
+            for(Edge<int>* e:deliveryGraph_->findVertex(mstPredecessors[i])->getAdj()) {
+                if(e->getDest()->getInfo()==i) {
+                    mstEdges.push_back(e);
+                }
+            }
         }
     }
-
     std::vector<Vertex<int>*> oddVertices = findOddDegreeVertices(g, mstPredecessors);
-    std::vector<std::pair<Vertex<int>*, Vertex<int>*>> mwpmVertices = minimumWeightPerfectMatching(oddVertices);
+    std::vector<std::pair<Vertex<int>*, Edge<int>*>> mwpmVertices = minimumWeightPerfectMatching(oddVertices);
     std::vector<Edge<int>*> mwpmEdges;
-    for(auto& pair : mwpmVertices) {
-        mwpmEdges.push_back(new Edge<int>(pair.first, pair.second,
-                                          calculate_distance(pair.first->getLatitude(), pair.first->getLongitude(),
-                                                             pair.second->getLatitude(), pair.second->getLongitude())));
+    for(auto e:mwpmVertices) {
+        mstEdges.push_back(e.second);
     }
 
     std::vector<Edge<int>*> eulerianEdges = combineMSTandMWPM(mstEdges, mwpmEdges);
-    std::vector<int> eulerianCircuit1 = eulerianCircuit(g, eulerianEdges);
-    return calculateTSPPath(eulerianCircuit1, g);
+    std::vector<int> eulerianCircuit1 = eulerianCircuit(g, eulerianEdges,0);
+    double cost=calculateTSPPath(eulerianCircuit1, g,eulerianEdges);
+    auto end=std::chrono::high_resolution_clock::now();
+    double res_t=std::chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
+    res_t*=1e-9;
+
+    return  std::make_pair(cost,res_t);
+}
+
+std::pair<double,double> DeliveryManager::realtsp(std::unique_ptr<Graph<int>>& g, int s) {
+    auto start=std::chrono::high_resolution_clock::now();
+    std::ios_base::sync_with_stdio(false);
+    std::vector<int> mstPredecessors = mstPrim(g,s);
+
+    std::vector<Edge<int>*> mstEdges;
+    for(int i=0;i<mstPredecessors.size();i++) {
+        if(mstPredecessors[i]!=-1) {
+            for(Edge<int>* e:deliveryGraph_->findVertex(mstPredecessors[i])->getAdj()) {
+                if(e->getDest()->getInfo()==i) {
+                    mstEdges.push_back(e);
+                }
+            }
+        }
+    }
+    std::vector<Vertex<int>*> oddVertices = findOddDegreeVertices(g, mstPredecessors);
+    std::vector<std::pair<Vertex<int>*, Edge<int>*>> mwpmVertices = minimumWeightPerfectMatching(oddVertices);
+    std::vector<Edge<int>*> mwpmEdges;
+    for(auto e:mwpmVertices) {
+        mstEdges.push_back(e.second);
+    }
+
+    std::vector<Edge<int>*> eulerianEdges = combineMSTandMWPM(mstEdges, mwpmEdges);
+    std::vector<int> eulerianCircuit1 = eulerianCircuit(g, eulerianEdges,s);
+    double cost=calculateTSPPath(eulerianCircuit1, g,eulerianEdges);
+    auto end=std::chrono::high_resolution_clock::now();
+    double res_t=std::chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
+    res_t*=1e-9;
+
+    return  std::make_pair(cost,res_t);
 }
 
 
