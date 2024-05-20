@@ -108,8 +108,20 @@ std::wstring Interface::smooth_string(const std::wstring& w){
     return sw;
 }
 
-void Interface::initializeTable(){
-
+void Interface::writeOptionDefaulterInput(){
+    if (!write.empty() && write != write_default) {
+        options[location][0] = L"Start Vertice: " + bold + write + end_effect;
+    } else {
+        options[location][0] = L"Choose a Start Vertice";
+    }
+    if (selected == 0 && write.empty()){
+        options[location][0] = underline + bold + red + L"Choose a Start Vertice -> " + end_effect + L"  " + italic + write_default + end_italic;
+        write_mode = true;
+    }
+    else if (selected == 0){
+        options[location][0] = underline + bold + red + L"Press Enter to run-> " + end_effect + L"  " + write;
+        write_mode = true;
+    }
 }
 
 
@@ -143,7 +155,7 @@ void Interface::enterInputHandler(int loc, unsigned long sel, bool back, bool ma
 }
 
 void Interface::inputResponseInWriteMode(wchar_t user_in){
-    if ((isalpha(user_in) || isalnum(user_in) || (user_in >= 128 && user_in <= 255) || (ispunct(user_in)))) {
+    if (isdigit(user_in) ) {
         if (write == write_default) {
             write = L"";
         }
@@ -196,6 +208,10 @@ void Interface::inputer(){
         if (user_input == 27){
             user_input = getwchar();
             user_input = getwchar();
+            write_mode = false;
+            basicInputResponse(user_input);
+        }
+        else if (user_input == '\n'){
             write_mode = false;
             basicInputResponse(user_input);
         }
@@ -375,7 +391,6 @@ void Interface::basicInputResponse(unsigned int user_in) {
                     break;
                     case 4:
                         enterInputHandler(9,0,false,false,false);
-                           real_res=dev_man->realtsp(dev_man->getDeliveryGraph(),0);
                     break;
                     case 5:
                         enterInputHandler(0, 0, true, false, false);
@@ -426,9 +441,15 @@ void Interface::basicInputResponse(unsigned int user_in) {
             case 9:
                 switch (selected) {
                     case 0:
+                        if (!write.empty()){
+                            do_function = true;
+                        }
+                        enterInputHandler(9, 0, false, false, false);
+                        break;
+                    case 1:
                         enterInputHandler(0, 0, true, false, false);
                     break;
-                    case 1:
+                    case 2:
                         location = -1;
                     break;
 
@@ -521,9 +542,14 @@ void Interface::run(){
                 inputer();
             break;
             case 9:
+                writeOptionDefaulterInput();
                 printDirectory(directory);
-                printMonoInfo(L"The cost using Approximation is "+bold +converter.from_bytes(std::to_string(real_res.first))+end_effect);
-                printMonoInfo(L"Execution time :" + bold +converter.from_bytes(std::to_string(real_res.second)) + L"s"+ end_effect);
+                if (do_function) {
+                    real_res=dev_man->realtsp(dev_man->getDeliveryGraph(),std::stoi(converter.to_bytes(write)));
+                    printMonoInfo(L"The cost using Approximation is "+bold +converter.from_bytes(std::to_string(real_res.first))+end_effect);
+                    printMonoInfo(L"Execution time :" + bold +converter.from_bytes(std::to_string(real_res.second)) + L"s"+ end_effect);
+                    do_function = false;
+                }
                 printOptions(options[location],selected,false);
                 printHelper(helpers,{0});
                 inputer();
