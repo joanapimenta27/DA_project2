@@ -19,7 +19,9 @@ void Interface::refreshDirectories() {
     directories.emplace_back(L"Choose DataSet");
     directories.emplace_back(converter.from_bytes(data_choice)+L" "+converter.from_bytes(edge_choice));
     directories.emplace_back(L"Cost using Backtracking");
-    directories.emplace_back(L"Cost using Approximation");
+    directories.emplace_back(L"Cost using Triangular Approximation");
+    directories.emplace_back(L"Cost using Christofides Approximation");
+    directories.emplace_back(L"Cost using Christofides Approximation in Real Graphs");
 }
 
 void Interface::stackClear(std::stack<int> &s){
@@ -368,9 +370,17 @@ void Interface::basicInputResponse(unsigned int user_in) {
                         approximation_res=dev_man->tsp2Approximation(dev_man->getDeliveryGraph());
                     break;
                     case 3:
-                        enterInputHandler(0, 0, true, false, false);
+                        enterInputHandler(8,0,false,false,false);
+                    christofile_res=dev_man->heuristicTSP(dev_man->getDeliveryGraph());
                     break;
                     case 4:
+                        enterInputHandler(9,0,false,false,false);
+                           real_res=dev_man->realtsp(dev_man->getDeliveryGraph(),0);
+                    break;
+                    case 5:
+                        enterInputHandler(0, 0, true, false, false);
+                    break;
+                    case 6:
                         location = -1;
                     break;
 
@@ -390,6 +400,30 @@ void Interface::basicInputResponse(unsigned int user_in) {
                 }
             break;
             case 7:
+                switch (selected) {
+                    case 0:
+                        enterInputHandler(0, 0, true, false, false);
+                    break;
+                    case 1:
+                        location = -1;
+                    break;
+
+
+                }
+            break;
+            case 8:
+                switch (selected) {
+                    case 0:
+                        enterInputHandler(0, 0, true, false, false);
+                    break;
+                    case 1:
+                        location = -1;
+                    break;
+
+
+                }
+            break;
+            case 9:
                 switch (selected) {
                     case 0:
                         enterInputHandler(0, 0, true, false, false);
@@ -477,6 +511,23 @@ void Interface::run(){
                 printOptions(options[location],selected,false);
                 printHelper(helpers,{0});
                 inputer();
+            break;
+            case 8:
+                printDirectory(directory);
+                printMonoInfo(L"The cost using Approximation is "+bold +converter.from_bytes(std::to_string(christofile_res.first))+end_effect);
+                printMonoInfo(L"Execution time :" + bold +converter.from_bytes(std::to_string(christofile_res.second)) + L"s"+ end_effect);
+                printOptions(options[location],selected,false);
+                printHelper(helpers,{0});
+                inputer();
+            break;
+            case 9:
+                printDirectory(directory);
+                printMonoInfo(L"The cost using Approximation is "+bold +converter.from_bytes(std::to_string(real_res.first))+end_effect);
+                printMonoInfo(L"Execution time :" + bold +converter.from_bytes(std::to_string(real_res.second)) + L"s"+ end_effect);
+                printOptions(options[location],selected,false);
+                printHelper(helpers,{0});
+                inputer();
+            break;
 
         }
 

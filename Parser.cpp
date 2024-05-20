@@ -2,6 +2,12 @@
 // Created by joana on 14-05-2024.
 //
 
+/**
+ * @brief Constructs a Parser object and opens the specified file.
+ *
+ * @param fName The name of the file to open.
+ * @throw std::runtime_error if the file cannot be opened.
+ */
 #include "Parser.h"
 Parser::Parser(const std::string &fName) {
     file_.open(fName);
@@ -10,6 +16,12 @@ Parser::Parser(const std::string &fName) {
     }
 }
 
+/**
+ * @brief Trims whitespace from both ends of a string.
+ *
+ * @param str The string to trim.
+ * @return The trimmed string.
+ */
 std::string trim(const std::string& str) {
     size_t start = 0;
     size_t end = str.length();
@@ -25,6 +37,11 @@ std::string trim(const std::string& str) {
     return str.substr(start, end - start);
 }
 
+/**
+ * @brief Reads and parses data from the file into a 2D vector of strings.
+ *
+ * @return A 2D vector containing the parsed data.
+ */
 std::vector<std::vector<std::string>> Parser::getData() {
     std::string line;
     while (std::getline(file_, line)) {

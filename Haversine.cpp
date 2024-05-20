@@ -5,6 +5,24 @@
 #include "Haversine.h"
 #include <cmath>
 
+
+/**
+ * @brief Calculate the great-circle distance between two points on the Earth
+ *        specified by their latitude and longitude using the Haversine formula.
+ *
+ * This function computes the shortest distance over the Earth's surface,
+ * giving an "as-the-crow-flies" distance between the points (ignoring any hills,
+ * valleys, or other obstacles).
+ *
+ * @param latitude1 Latitude of the first point in degrees.
+ * @param longitude1 Longitude of the first point in degrees.
+ * @param latitude2 Latitude of the second point in degrees.
+ * @param longitude2 Longitude of the second point in degrees.
+ * @return The distance between the two points in kilometers.
+ *
+ * @complexity Constant time complexity O(1), as the number of operations
+ * does not depend on the input size.
+ */
 auto calculate_distance(const angle_t latitude1,
                         const angle_t longitude1,
                         const angle_t latitude2,

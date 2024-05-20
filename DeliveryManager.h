@@ -6,11 +6,11 @@
 #define DELIVERYMANAGER_H
 
 #include <memory>
-#include <set>
 
 #include "Graph.h"
 #include "Parser.h"
 #include "Haversine.h"
+
 
 class DeliveryManager{
 public:
@@ -30,7 +30,6 @@ private:
 
 public:
 
-
     DeliveryManager(std::string data_choice, std::string edge_choice);
 
     std::unique_ptr<Graph<int>>& getDeliveryGraph() ;
@@ -41,13 +40,27 @@ public:
 
     std::pair<double,double> tsp2Approximation(std::unique_ptr<Graph<int>>& g);
 
-    std::vector<int> mstPrim(std::unique_ptr<Graph<int>>& g);
+    std::vector<int> mstPrim(std::unique_ptr<Graph<int>>& g,int start);
 
     void dfsPrim(std::unique_ptr<Graph<int>>& g,int v,std::vector<int>& res,std::vector<int> prim);
 
     void updateQueue( std::priority_queue<std::pair<double, Vertex<int>*>, std::vector<std::pair<double, Vertex<int>*>>, std::greater<std::pair<double, Vertex<int>*>>>& V,double w, Vertex<int>* v);
 
     Edge<int> * findEdge(std::unique_ptr<Graph<int>>& g,const int &in,const int &dest);
+
+    std::vector<Vertex<int> *> findOddDegreeVertices(std::unique_ptr<Graph<int>> &g, const std::vector<int> &mst);
+
+    std::vector<std::pair<Vertex<int>*, Edge<int>*>> minimumWeightPerfectMatching(std::vector<Vertex<int>*>& oddVertices);
+
+    std::vector<Edge<int> *> combineMSTandMWPM(const std::vector<Edge<int> *> &mstEdges, const std::vector<Edge<int> *> &mwpmEdges);
+
+    double calculateTSPPath(const std::vector<int> &eulerianCircuit, std::unique_ptr<Graph<int>> &g,const std::vector<Edge<int>*>& eulerianEdges);
+
+    std::pair<double,double> heuristicTSP(std::unique_ptr<Graph<int>> &g);
+
+    std::vector<int> eulerianCircuit(std::unique_ptr<Graph<int>> &g, const std::vector<Edge<int> *> &eulerianEdges,int start);
+
+    std::pair<double,double> realtsp(std::unique_ptr<Graph<int>>& g, int v);
 };
 
 
