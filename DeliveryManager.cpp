@@ -8,6 +8,15 @@
 #include <stack>
 
 
+/**
+ * @brief Constructor for DeliveryManager class.
+ *
+ * @details Initializes the delivery graph from the given vertex and edge files.
+ *
+ * @param vertex_file The file containing the vertex data.
+ * @param edge_file The file containing the edge data. If empty, the vertex file contains both vertices and edges.
+ * @complexity O(V + E) where V is the number of vertices and E is the number of edges.
+ */
 DeliveryManager::DeliveryManager(std::string vertex_file, std::string edge_file):deliveryGraph_(std::make_unique<Graph<int>>()),vertex_(std::unordered_map<int, Vertex<int>*,vert_struct>())
 {
     if(edge_file=="") {
@@ -58,13 +67,27 @@ DeliveryManager::DeliveryManager(std::string vertex_file, std::string edge_file)
 }
 
 
-
+/**
+ * @brief Get the delivery graph.
+ *
+ * @return A reference to the unique pointer of the delivery graph.
+ * @complexity O(1)
+ */
 std::unique_ptr<Graph<int> > &DeliveryManager::getDeliveryGraph() {
     return deliveryGraph_;
 }
 
 
-
+/**
+ * @brief Backtracking function for solving the Traveling Salesman Problem (TSP).
+ *
+ * @param g The graph.
+ * @param vis The number of visited vertices.
+ * @param v The current vertex.
+ * @param res The minimum cost result.
+ * @param cost The current cost.
+ * @complexity O(V!)
+ */
 void DeliveryManager::backtrack_tsp(std::unique_ptr<Graph<int>>& g,int vis, Vertex<int>* v,double& res,double cost) {
     if(vis==g->getVertexSet().size()) {
         for(Edge<int>* e: v->getAdj()) {
@@ -89,7 +112,13 @@ void DeliveryManager::backtrack_tsp(std::unique_ptr<Graph<int>>& g,int vis, Vert
         }
     }
 }
-
+/**
+ * @brief Solve the TSP using backtracking.
+ *
+ * @param g The graph.
+ * @return A pair containing the minimum cost and the time taken to find the solution.
+ * @complexity O(V!)
+ */
 std::pair<double, double> DeliveryManager::backtracking(std::unique_ptr<Graph<int>>& g) {
     auto start=std::chrono::high_resolution_clock::now();
     std::ios_base::sync_with_stdio(false);
@@ -105,7 +134,14 @@ std::pair<double, double> DeliveryManager::backtracking(std::unique_ptr<Graph<in
     return  std::make_pair(res,res_t);
 
 }
-
+/**
+ * @brief Find the Minimum Spanning Tree (MST) using Prim's algorithm.
+ *
+ * @param g The graph.
+ * @param start The starting vertex.
+ * @return A vector of predecessors in the MST.
+ * @complexity O(E log V)
+ */
 std::vector<int> DeliveryManager::mstPrim(std::unique_ptr<Graph<int>>& g,int start) {
     std::vector<int> pre(g->getVertexSet().size(), -1);
     std::vector<double> key(g->getVertexSet().size(), INT_MAX);
@@ -142,7 +178,14 @@ std::vector<int> DeliveryManager::mstPrim(std::unique_ptr<Graph<int>>& g,int sta
     }
     return pre;
 }
-
+/**
+ * @brief Update the priority queue.
+ *
+ * @param V The priority queue.
+ * @param w The weight.
+ * @param v The vertex.
+ * @complexity O(V)
+ */
 void DeliveryManager::updateQueue( std::priority_queue<std::pair<double, Vertex<int>*>, std::vector<std::pair<double, Vertex<int>*>>, std::greater<std::pair<double, Vertex<int>*>>>& V,double w,Vertex<int>* v) {
     std::vector<std::pair<double,Vertex<int>*>> tmp;
     while(!V.empty()) {
@@ -159,6 +202,15 @@ void DeliveryManager::updateQueue( std::priority_queue<std::pair<double, Vertex<
     }
 }
 
+/**
+ * @brief Depth-first search used in Prim's algorithm.
+ *
+ * @param g The graph.
+ * @param v The current vertex.
+ * @param res The result vector.
+ * @param prim The MST predecessor vector.
+ * @complexity O(V + E)
+ */
 void DeliveryManager::dfsPrim(std::unique_ptr<Graph<int>>& g,int v,std::vector<int>& res,std::vector<int> prim) {
     if(!g->findVertex(v)->isVisited()) {
         g->findVertex(v)->setVisited(true);
@@ -175,7 +227,15 @@ void DeliveryManager::dfsPrim(std::unique_ptr<Graph<int>>& g,int v,std::vector<i
 
     }
 }
-
+/**
+ * @brief Find the edge between two vertices.
+ *
+ * @param g The graph.
+ * @param in The source vertex.
+ * @param dest The destination vertex.
+ * @return A pointer to the edge, or nullptr if not found.
+ * @complexity O(E)
+ */
 Edge<int> * DeliveryManager::findEdge(std::unique_ptr<Graph<int>>& g,const int &in,const int &dest){
     for (auto v : g->getVertexSet())
         if (v->getInfo() == in)
@@ -188,7 +248,16 @@ Edge<int> * DeliveryManager::findEdge(std::unique_ptr<Graph<int>>& g,const int &
 }
 
 
-
+/**
+ * @brief 2-Approximation algorithm for solving the Traveling Salesman Problem (TSP).
+ *
+ * @details This method uses a Minimum Spanning Tree (MST) followed by a depth-first search (DFS)
+ * to find a Hamiltonian circuit that approximates the TSP tour within a factor of 2.
+ *
+ * @param g The graph representing the delivery network.
+ * @return A pair containing the total cost of the approximate TSP tour and the time taken to compute it.
+ * @complexity O(V^2 log V)
+ */
 std::pair<double,double> DeliveryManager::tsp2Approximation(std::unique_ptr<Graph<int>>& g) {
         double cost=0;
         auto start=std::chrono::high_resolution_clock::now();
@@ -227,29 +296,17 @@ std::pair<double,double> DeliveryManager::tsp2Approximation(std::unique_ptr<Grap
 
 }
 
-
-
-
-/*In this approach, you are asked to implement another heuristic of your choice to solve the TSP again
-starting and ending the node tour on node with the zero-identifier label. The emphasis in this approach
-should be on efficiency as this algorithm should be feasible even for the large graphs. Here you can make
-use of several algorithmic techniques from the use of divide-and-conquer to splitting the graph into multiple
-geographic sections to the use of clustering, or both, possibly even in combination with the 2-
-approximation algorithm. In the end, you are strongly suggested to compare the quality and run-time
-performance of your heuristic solution against the 2-approximation algorithm. You are expected to present
-only one heuristic that works well over the basic Triangular approximation or one that offers comparable
-tour length results but with noticeably faster execution time (i.e., time complexity). You should avoid
-investing a tremendous effort in developing an heuristic that yields marginal gains. It is also important to
-demonstrate what gains you achieved with your heuristic, so, during the presentation, a comparative analysis
-between the backtracking, the triangular approximation and your algorithm should be shown.
-Once again, in order to directly compare your results with the triangular approximation heuristic, you should
-assume that all given graphs are fully connected and use the Haversine distance to compute the weights
-of the edges that are not explicitly described in the dataset, thus making the graph fully connected.
- */
-
 // Created by joana on 14-05-2024.
 
 // Find odd degree vertices in MST
+/**
+ * @brief Find odd degree vertices in a Minimum Spanning Tree (MST).
+ *
+ * @param g The graph representing the delivery network.
+ * @param mst The predecessor list representing the MST.
+ * @return A vector of vertices with odd degrees.
+ * @complexity O(V + E)
+ */
 std::vector<Vertex<int>*> DeliveryManager::findOddDegreeVertices(std::unique_ptr<Graph<int>>& g, const std::vector<int>& mst) {
     std::unordered_map<int, int> degreeCount;
     for(int i = 0; i < mst.size(); ++i) {
@@ -268,6 +325,16 @@ std::vector<Vertex<int>*> DeliveryManager::findOddDegreeVertices(std::unique_ptr
 }
 
 // Minimum Weight Perfect Matching using a naive approach (for simplicity)
+/**
+ * @brief Find the Minimum Weight Perfect Matching (MWPM) for odd degree vertices.
+ *
+ * @details This naive approach finds the MWPM by checking each pair of vertices and choosing
+ * the minimum weight edge connecting them.
+ *
+ * @param oddVertices The vertices with odd degrees.
+ * @return A vector of pairs representing the matched vertices and their connecting edges.
+ * @complexity O(V^2)
+ */
 std::vector<std::pair<Vertex<int>*, Edge<int>*>> DeliveryManager::minimumWeightPerfectMatching(std::vector<Vertex<int>*>& oddVertices) {
     std::vector<std::pair<Vertex<int>*, Edge<int>*>> matching;
     for(int i = 0; i < oddVertices.size(); ++i) {
@@ -306,6 +373,14 @@ std::vector<std::pair<Vertex<int>*, Edge<int>*>> DeliveryManager::minimumWeightP
 }
 
 // Combine MST and MWPM to form Eulerian graph
+/**
+ * @brief Combine MST edges and MWPM edges to form an Eulerian graph.
+ *
+ * @param mstEdges The edges of the Minimum Spanning Tree (MST).
+ * @param mwpmEdges The edges of the Minimum Weight Perfect Matching (MWPM).
+ * @return A vector of edges representing the Eulerian graph.
+ * @complexity O(V + E)
+ */
 std::vector<Edge<int>*> DeliveryManager::combineMSTandMWPM(const std::vector<Edge<int>*>& mstEdges, const std::vector<Edge<int>*>& mwpmEdges) {
     std::vector<Edge<int>*> eulerianEdges;
     for(auto& edge : mstEdges) {
@@ -318,6 +393,15 @@ std::vector<Edge<int>*> DeliveryManager::combineMSTandMWPM(const std::vector<Edg
 }
 
 // Eulerian Circuit using Hierholzer's Algorithm
+/**
+ * @brief Find an Eulerian Circuit using Hierholzer's Algorithm.
+ *
+ * @param g The graph representing the delivery network.
+ * @param eulerianEdges The edges forming the Eulerian graph.
+ * @param start The starting vertex.
+ * @return A vector representing the Eulerian circuit.
+ * @complexity O(V + E)
+ */
 std::vector<int> DeliveryManager::eulerianCircuit(std::unique_ptr<Graph<int>>& g, const std::vector<Edge<int>*>& eulerianEdges,int start) {
     std::unordered_map<int, std::vector<int>> adjList;
     for(auto& edge : eulerianEdges) {
@@ -342,6 +426,18 @@ std::vector<int> DeliveryManager::eulerianCircuit(std::unique_ptr<Graph<int>>& g
     return circuit;
 }
 
+/**
+ * @brief Calculate the cost of a TSP path from an Eulerian circuit.
+ *
+ * @details This method removes repeated vertices to find a Hamiltonian circuit from the Eulerian circuit
+ * and calculates the total cost of the TSP path.
+ *
+ * @param eulerianCircuit The Eulerian circuit.
+ * @param g The graph representing the delivery network.
+ * @param eulerianEdges The edges forming the Eulerian graph.
+ * @return The total cost of the TSP path.
+ * @complexity O(V + E)
+ */
 double DeliveryManager::calculateTSPPath(const std::vector<int>& eulerianCircuit, std::unique_ptr<Graph<int>>& g,const std::vector<Edge<int>*>& eulerianEdges) {
     std::vector<bool> visited(eulerianCircuit.size(), false);
     double cost = 0.0;
@@ -377,6 +473,16 @@ double DeliveryManager::calculateTSPPath(const std::vector<int>& eulerianCircuit
 }
 
 // Heuristic approach to solve TSP
+/**
+ * @brief Heuristic approach to solve the Traveling Salesman Problem (TSP).
+ *
+ * @details This method first finds a Minimum Spanning Tree (MST), then finds the Minimum Weight Perfect Matching (MWPM) for odd degree vertices in the MST,
+ * and finally forms an Eulerian graph. An Eulerian circuit is found and converted to a TSP path.
+ *
+ * @param g The graph representing the delivery network.
+ * @return A pair containing the total cost of the TSP path and the time taken to compute it.
+ * @complexity O(V^2 log V + V^3), where V is the number of vertices in the graph.
+ */
 std::pair<double,double> DeliveryManager::heuristicTSP(std::unique_ptr<Graph<int>>& g) {
     auto start=std::chrono::high_resolution_clock::now();
     std::ios_base::sync_with_stdio(false);
@@ -409,6 +515,18 @@ std::pair<double,double> DeliveryManager::heuristicTSP(std::unique_ptr<Graph<int
     return  std::make_pair(cost,res_t);
 }
 
+/**
+ * @brief Exact approach to solve the Traveling Salesman Problem (TSP).
+ *
+ * @details This method uses a similar approach as heuristicTSP but starts from a specified starting vertex.
+ * It finds an MST, then finds the MWPM for odd degree vertices in the MST, and finally forms an Eulerian graph.
+ * An Eulerian circuit is found and converted to a TSP path.
+ *
+ * @param g The graph representing the delivery network.
+ * @param s The starting vertex.
+ * @return A pair containing the total cost of the TSP path and the time taken to compute it.
+ * @complexity O(V^2 log V + V^3), where V is the number of vertices in the graph.
+ */
 std::pair<double,double> DeliveryManager::realtsp(std::unique_ptr<Graph<int>>& g, int s) {
     auto start=std::chrono::high_resolution_clock::now();
     std::ios_base::sync_with_stdio(false);
