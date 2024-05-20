@@ -17,7 +17,8 @@
  * @param edge_file The file containing the edge data. If empty, the vertex file contains both vertices and edges.
  * @complexity O(V + E) where V is the number of vertices and E is the number of edges.
  */
-DeliveryManager::DeliveryManager(std::string vertex_file, std::string edge_file):deliveryGraph_(std::make_unique<Graph<int>>()),vertex_(std::unordered_map<int, Vertex<int>*,vert_struct>())
+DeliveryManager::DeliveryManager(std::string vertex_file, std::string edge_file):deliveryGraph_(std::make_unique<Graph<int>>())
+,vertex_(std::unordered_map<int, Vertex<int>*,vert_struct>())
 {
     if(edge_file=="") {
         Parser edges(vertex_file);
