@@ -74,6 +74,7 @@ private:
     bool write_mode = false;
     bool table_mode = false;
     bool is_done = false;
+    bool do_function = false;
 
     std::wstring directory;
     std::vector<std::wstring> directories;
@@ -91,7 +92,7 @@ private:
             {7, 1}, {12, 1}, {14, 1}, {16, 1}
     };
     std::unordered_map<int, int> capOfWrite = {
-            {7, 30}, {12, 4}, {14, 5}, {16, 10}
+            {9, 4}, {12, 4}, {14, 5}, {16, 10}
     };
 
     std::unordered_map<int, int> locationWithTable = {
@@ -164,6 +165,7 @@ private:
 
                 },
             {
+                L"dummy",
                 L"Back",
                 L"Quit"
 
@@ -205,6 +207,7 @@ private:
 
     void tableModeCleaner2(std::vector<std::wstring> um);
 
+    void writeOptionDefaulterInput();
 };
 
 

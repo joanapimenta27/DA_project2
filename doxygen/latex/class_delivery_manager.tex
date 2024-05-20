@@ -1,0 +1,381 @@
+\doxysection{Delivery\+Manager Class Reference}
+\hypertarget{class_delivery_manager}{}\label{class_delivery_manager}\index{DeliveryManager@{DeliveryManager}}
+
+
+{\ttfamily \#include $<$Delivery\+Manager.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_delivery_manager_1_1vert__struct}{vert\+\_\+struct}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_delivery_manager_a2a75ff1c37600302ec61f5b38e82a778}{Delivery\+Manager}} (\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}} data\+\_\+choice, \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}} edge\+\_\+choice)
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{class_delivery_manager}{Delivery\+Manager} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \& \mbox{\hyperlink{class_delivery_manager_a98a0ff568850483ea9996e0fe33b5efa}{get\+Delivery\+Graph}} ()
+\begin{DoxyCompactList}\small\item\em Get the delivery graph. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::pair}}$<$ \mbox{\hyperlink{class_edge}{double}}, \mbox{\hyperlink{class_edge}{double}} $>$ \mbox{\hyperlink{class_delivery_manager_a8e2f556aed7fb05b839dbbcba4b9f7c0}{backtracking}} (\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&\mbox{\hyperlink{class_edge}{g}})
+\begin{DoxyCompactList}\small\item\em Solve the TSP using backtracking. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_delivery_manager_abbcd6351a900535ccf54b7f1baee8b95}{backtrack\+\_\+tsp}} (\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&\mbox{\hyperlink{class_edge}{g}}, \mbox{\hyperlink{class_edge}{int}} \mbox{\hyperlink{class_edge}{vis}}, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{v}}, \mbox{\hyperlink{class_edge}{double}} \&\mbox{\hyperlink{class_edge}{res}}, \mbox{\hyperlink{class_edge}{double}} \mbox{\hyperlink{class_edge}{cost}})
+\begin{DoxyCompactList}\small\item\em Backtracking function for solving the Traveling Salesman Problem (TSP). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::pair}}$<$ \mbox{\hyperlink{class_edge}{double}}, \mbox{\hyperlink{class_edge}{double}} $>$ \mbox{\hyperlink{class_delivery_manager_a74e0aa66632e29bcfe1d5e18a45f0d33}{tsp2\+Approximation}} (\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&\mbox{\hyperlink{class_edge}{g}})
+\begin{DoxyCompactList}\small\item\em 2-\/Approximation algorithm for solving the Traveling Salesman Problem (TSP). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \mbox{\hyperlink{class_delivery_manager_a7092bd6b733d06c9ee5426890165eb1e}{mst\+Prim}} (\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&\mbox{\hyperlink{class_edge}{g}}, \mbox{\hyperlink{class_edge}{int}} \mbox{\hyperlink{class_edge}{start}})
+\begin{DoxyCompactList}\small\item\em Find the Minimum Spanning Tree (MST) using Prim\textquotesingle{}s algorithm. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_delivery_manager_a37519dfa5d98f311fc4149779cfbe25c}{dfs\+Prim}} (\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&\mbox{\hyperlink{class_edge}{g}}, \mbox{\hyperlink{class_edge}{int}} \mbox{\hyperlink{class_edge}{v}}, \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \&\mbox{\hyperlink{class_edge}{res}}, \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \mbox{\hyperlink{class_edge}{prim}})
+\begin{DoxyCompactList}\small\item\em Depth-\/first search used in Prim\textquotesingle{}s algorithm. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{void}} \mbox{\hyperlink{class_delivery_manager_aa3139eb388ac4238eacb872ca25c644e}{update\+Queue}} (\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::priority\+\_\+queue}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::pair}}$<$ \mbox{\hyperlink{class_edge}{double}}, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$, \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::pair}}$<$ \mbox{\hyperlink{class_edge}{double}}, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ $>$, \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::greater}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::pair}}$<$ \mbox{\hyperlink{class_edge}{double}}, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ $>$ $>$ \&\mbox{\hyperlink{class_edge}{V}}, \mbox{\hyperlink{class_edge}{double}} \mbox{\hyperlink{class_edge}{w}}, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_edge}{v}})
+\begin{DoxyCompactList}\small\item\em Update the priority queue. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_delivery_manager_af7f6f474d9a95b79d3d2f3a983a51c5b}{find\+Edge}} (\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&\mbox{\hyperlink{class_edge}{g}}, \mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge}{int}} \&\mbox{\hyperlink{class_edge}{in}}, \mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge}{int}} \&dest)
+\begin{DoxyCompactList}\small\item\em Find the edge between two vertices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_delivery_manager_a7fcaf71c945bc552f1cca7676ff102e6}{find\+Odd\+Degree\+Vertices}} (\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&\mbox{\hyperlink{class_edge}{g}}, \mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \&\mbox{\hyperlink{class_edge}{mst}})
+\begin{DoxyCompactList}\small\item\em Find odd degree vertices in a Minimum Spanning Tree (MST). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::pair}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ $>$ \mbox{\hyperlink{class_delivery_manager_acc3db81588d5ec2a563a88acb4674ef7}{minimum\+Weight\+Perfect\+Matching}} (\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{class_edge}{odd\+Vertices}})
+\begin{DoxyCompactList}\small\item\em Find the Minimum Weight Perfect Matching (MWPM) for odd degree vertices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_delivery_manager_a9bb7c31d776777862d38e21cec217807}{combine\+MSTand\+MWPM}} (\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{class_edge}{mst\+Edges}}, \mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{class_edge}{mwpm\+Edges}})
+\begin{DoxyCompactList}\small\item\em Combine MST edges and MWPM edges to form an Eulerian graph. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge}{double}} \mbox{\hyperlink{class_delivery_manager_aca156162b2253c64180ad2d332279712}{calculate\+TSPPath}} (\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \&\mbox{\hyperlink{class_delivery_manager_aaec8df91da23bb48afa05ce157084644}{eulerian\+Circuit}}, \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&\mbox{\hyperlink{class_edge}{g}}, \mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{class_edge}{eulerian\+Edges}})
+\begin{DoxyCompactList}\small\item\em Calculate the cost of a TSP path from an Eulerian circuit. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::pair}}$<$ \mbox{\hyperlink{class_edge}{double}}, \mbox{\hyperlink{class_edge}{double}} $>$ \mbox{\hyperlink{class_delivery_manager_ab702053edeeaeabf91fafbc093e33b51}{heuristic\+TSP}} (\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&\mbox{\hyperlink{class_edge}{g}})
+\begin{DoxyCompactList}\small\item\em Heuristic approach to solve the Traveling Salesman Problem (TSP). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \mbox{\hyperlink{class_delivery_manager_aaec8df91da23bb48afa05ce157084644}{eulerian\+Circuit}} (\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&\mbox{\hyperlink{class_edge}{g}}, \mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&\mbox{\hyperlink{class_edge}{eulerian\+Edges}}, \mbox{\hyperlink{class_edge}{int}} \mbox{\hyperlink{class_edge}{start}})
+\begin{DoxyCompactList}\small\item\em Find an Eulerian Circuit using Hierholzer\textquotesingle{}s Algorithm. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::pair}}$<$ \mbox{\hyperlink{class_edge}{double}}, \mbox{\hyperlink{class_edge}{double}} $>$ \mbox{\hyperlink{class_delivery_manager_a1f7fdb55fc83d756c8ee5ab032dc0670}{realtsp}} (\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&\mbox{\hyperlink{class_edge}{g}}, \mbox{\hyperlink{class_edge}{int}} \mbox{\hyperlink{class_edge}{v}})
+\begin{DoxyCompactList}\small\item\em Exact approach to solve the Traveling Salesman Problem (TSP). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_delivery_manager_a2a75ff1c37600302ec61f5b38e82a778}\label{class_delivery_manager_a2a75ff1c37600302ec61f5b38e82a778} 
+\index{DeliveryManager@{DeliveryManager}!DeliveryManager@{DeliveryManager}}
+\index{DeliveryManager@{DeliveryManager}!DeliveryManager@{DeliveryManager}}
+\doxysubsubsection{\texorpdfstring{DeliveryManager()}{DeliveryManager()}}
+{\footnotesize\ttfamily Delivery\+Manager\+::\+Delivery\+Manager (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}}}]{vertex\+\_\+file,  }\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::string}}}]{edge\+\_\+file }\end{DoxyParamCaption})}
+
+
+
+Constructor for \doxylink{class_delivery_manager}{Delivery\+Manager} class. 
+
+Initializes the delivery graph from the given vertex and edge files.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex\+\_\+file} & The file containing the vertex data. \\
+\hline
+{\em edge\+\_\+file} & The file containing the edge data. If empty, the vertex file contains both vertices and edges. @complexity O(V + E) where V is the number of vertices and E is the number of edges. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_delivery_manager_abbcd6351a900535ccf54b7f1baee8b95}\label{class_delivery_manager_abbcd6351a900535ccf54b7f1baee8b95} 
+\index{DeliveryManager@{DeliveryManager}!backtrack\_tsp@{backtrack\_tsp}}
+\index{backtrack\_tsp@{backtrack\_tsp}!DeliveryManager@{DeliveryManager}}
+\doxysubsubsection{\texorpdfstring{backtrack\_tsp()}{backtrack\_tsp()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Delivery\+Manager\+::backtrack\+\_\+tsp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&}]{g,  }\item[{\mbox{\hyperlink{class_edge}{int}}}]{vis,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*}}]{v,  }\item[{\mbox{\hyperlink{class_edge}{double}} \&}]{res,  }\item[{\mbox{\hyperlink{class_edge}{double}}}]{cost }\end{DoxyParamCaption})}
+
+
+
+Backtracking function for solving the Traveling Salesman Problem (TSP). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph. \\
+\hline
+{\em vis} & The number of visited vertices. \\
+\hline
+{\em v} & The current vertex. \\
+\hline
+{\em res} & The minimum cost result. \\
+\hline
+{\em cost} & The current cost. @complexity O(V!) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_delivery_manager_a8e2f556aed7fb05b839dbbcba4b9f7c0}\label{class_delivery_manager_a8e2f556aed7fb05b839dbbcba4b9f7c0} 
+\index{DeliveryManager@{DeliveryManager}!backtracking@{backtracking}}
+\index{backtracking@{backtracking}!DeliveryManager@{DeliveryManager}}
+\doxysubsubsection{\texorpdfstring{backtracking()}{backtracking()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::pair}}$<$ \mbox{\hyperlink{class_edge}{double}}, \mbox{\hyperlink{class_edge}{double}} $>$ Delivery\+Manager\+::backtracking (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&}]{g }\end{DoxyParamCaption})}
+
+
+
+Solve the TSP using backtracking. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pair containing the minimum cost and the time taken to find the solution. @complexity O(V!) 
+\end{DoxyReturn}
+\Hypertarget{class_delivery_manager_aca156162b2253c64180ad2d332279712}\label{class_delivery_manager_aca156162b2253c64180ad2d332279712} 
+\index{DeliveryManager@{DeliveryManager}!calculateTSPPath@{calculateTSPPath}}
+\index{calculateTSPPath@{calculateTSPPath}!DeliveryManager@{DeliveryManager}}
+\doxysubsubsection{\texorpdfstring{calculateTSPPath()}{calculateTSPPath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{double}} Delivery\+Manager\+::calculate\+TSPPath (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \&}]{eulerian\+Circuit,  }\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&}]{g,  }\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&}]{eulerian\+Edges }\end{DoxyParamCaption})}
+
+
+
+Calculate the cost of a TSP path from an Eulerian circuit. 
+
+This method removes repeated vertices to find a Hamiltonian circuit from the Eulerian circuit and calculates the total cost of the TSP path.
+
+
+\begin{DoxyParams}{Parameters}
+{\em eulerian\+Circuit} & The Eulerian circuit. \\
+\hline
+{\em g} & The graph representing the delivery network. \\
+\hline
+{\em eulerian\+Edges} & The edges forming the Eulerian graph. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The total cost of the TSP path. @complexity O(V + E) 
+\end{DoxyReturn}
+\Hypertarget{class_delivery_manager_a9bb7c31d776777862d38e21cec217807}\label{class_delivery_manager_a9bb7c31d776777862d38e21cec217807} 
+\index{DeliveryManager@{DeliveryManager}!combineMSTandMWPM@{combineMSTandMWPM}}
+\index{combineMSTandMWPM@{combineMSTandMWPM}!DeliveryManager@{DeliveryManager}}
+\doxysubsubsection{\texorpdfstring{combineMSTandMWPM()}{combineMSTandMWPM()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ Delivery\+Manager\+::combine\+MSTand\+MWPM (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&}]{mst\+Edges,  }\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&}]{mwpm\+Edges }\end{DoxyParamCaption})}
+
+
+
+Combine MST edges and MWPM edges to form an Eulerian graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mst\+Edges} & The edges of the Minimum Spanning Tree (MST). \\
+\hline
+{\em mwpm\+Edges} & The edges of the Minimum Weight Perfect Matching (MWPM). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of edges representing the Eulerian graph. @complexity O(V + E) 
+\end{DoxyReturn}
+\Hypertarget{class_delivery_manager_a37519dfa5d98f311fc4149779cfbe25c}\label{class_delivery_manager_a37519dfa5d98f311fc4149779cfbe25c} 
+\index{DeliveryManager@{DeliveryManager}!dfsPrim@{dfsPrim}}
+\index{dfsPrim@{dfsPrim}!DeliveryManager@{DeliveryManager}}
+\doxysubsubsection{\texorpdfstring{dfsPrim()}{dfsPrim()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Delivery\+Manager\+::dfs\+Prim (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&}]{g,  }\item[{\mbox{\hyperlink{class_edge}{int}}}]{v,  }\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \&}]{res,  }\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$}]{prim }\end{DoxyParamCaption})}
+
+
+
+Depth-\/first search used in Prim\textquotesingle{}s algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph. \\
+\hline
+{\em v} & The current vertex. \\
+\hline
+{\em res} & The result vector. \\
+\hline
+{\em prim} & The MST predecessor vector. @complexity O(V + E) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_delivery_manager_aaec8df91da23bb48afa05ce157084644}\label{class_delivery_manager_aaec8df91da23bb48afa05ce157084644} 
+\index{DeliveryManager@{DeliveryManager}!eulerianCircuit@{eulerianCircuit}}
+\index{eulerianCircuit@{eulerianCircuit}!DeliveryManager@{DeliveryManager}}
+\doxysubsubsection{\texorpdfstring{eulerianCircuit()}{eulerianCircuit()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ Delivery\+Manager\+::eulerian\+Circuit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&}]{g,  }\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&}]{eulerian\+Edges,  }\item[{\mbox{\hyperlink{class_edge}{int}}}]{start }\end{DoxyParamCaption})}
+
+
+
+Find an Eulerian Circuit using Hierholzer\textquotesingle{}s Algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph representing the delivery network. \\
+\hline
+{\em eulerian\+Edges} & The edges forming the Eulerian graph. \\
+\hline
+{\em start} & The starting vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector representing the Eulerian circuit. @complexity O(V + E) 
+\end{DoxyReturn}
+\Hypertarget{class_delivery_manager_af7f6f474d9a95b79d3d2f3a983a51c5b}\label{class_delivery_manager_af7f6f474d9a95b79d3d2f3a983a51c5b} 
+\index{DeliveryManager@{DeliveryManager}!findEdge@{findEdge}}
+\index{findEdge@{findEdge}!DeliveryManager@{DeliveryManager}}
+\doxysubsubsection{\texorpdfstring{findEdge()}{findEdge()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} Delivery\+Manager\+::find\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&}]{g,  }\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge}{int}} \&}]{in,  }\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge}{int}} \&}]{dest }\end{DoxyParamCaption})}
+
+
+
+Find the edge between two vertices. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph. \\
+\hline
+{\em in} & The source vertex. \\
+\hline
+{\em dest} & The destination vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the edge, or nullptr if not found. @complexity O(\+E) 
+\end{DoxyReturn}
+\Hypertarget{class_delivery_manager_a7fcaf71c945bc552f1cca7676ff102e6}\label{class_delivery_manager_a7fcaf71c945bc552f1cca7676ff102e6} 
+\index{DeliveryManager@{DeliveryManager}!findOddDegreeVertices@{findOddDegreeVertices}}
+\index{findOddDegreeVertices@{findOddDegreeVertices}!DeliveryManager@{DeliveryManager}}
+\doxysubsubsection{\texorpdfstring{findOddDegreeVertices()}{findOddDegreeVertices()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ Delivery\+Manager\+::find\+Odd\+Degree\+Vertices (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&}]{g,  }\item[{\mbox{\hyperlink{class_edge}{const}} \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \&}]{mst }\end{DoxyParamCaption})}
+
+
+
+Find odd degree vertices in a Minimum Spanning Tree (MST). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph representing the delivery network. \\
+\hline
+{\em mst} & The predecessor list representing the MST. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of vertices with odd degrees. @complexity O(V + E) 
+\end{DoxyReturn}
+\Hypertarget{class_delivery_manager_a98a0ff568850483ea9996e0fe33b5efa}\label{class_delivery_manager_a98a0ff568850483ea9996e0fe33b5efa} 
+\index{DeliveryManager@{DeliveryManager}!getDeliveryGraph@{getDeliveryGraph}}
+\index{getDeliveryGraph@{getDeliveryGraph}!DeliveryManager@{DeliveryManager}}
+\doxysubsubsection{\texorpdfstring{getDeliveryGraph()}{getDeliveryGraph()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \& Delivery\+Manager\+::get\+Delivery\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the delivery graph. 
+
+\begin{DoxyReturn}{Returns}
+A reference to the unique pointer of the delivery graph. @complexity O(1) 
+\end{DoxyReturn}
+\Hypertarget{class_delivery_manager_ab702053edeeaeabf91fafbc093e33b51}\label{class_delivery_manager_ab702053edeeaeabf91fafbc093e33b51} 
+\index{DeliveryManager@{DeliveryManager}!heuristicTSP@{heuristicTSP}}
+\index{heuristicTSP@{heuristicTSP}!DeliveryManager@{DeliveryManager}}
+\doxysubsubsection{\texorpdfstring{heuristicTSP()}{heuristicTSP()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::pair}}$<$ \mbox{\hyperlink{class_edge}{double}}, \mbox{\hyperlink{class_edge}{double}} $>$ Delivery\+Manager\+::heuristic\+TSP (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&}]{g }\end{DoxyParamCaption})}
+
+
+
+Heuristic approach to solve the Traveling Salesman Problem (TSP). 
+
+This method first finds a Minimum Spanning Tree (MST), then finds the Minimum Weight Perfect Matching (MWPM) for odd degree vertices in the MST, and finally forms an Eulerian graph. An Eulerian circuit is found and converted to a TSP path.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph representing the delivery network. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pair containing the total cost of the TSP path and the time taken to compute it. @complexity O(V\texorpdfstring{$^\wedge$}{\string^}2 log V + V\texorpdfstring{$^\wedge$}{\string^}3), where V is the number of vertices in the graph. 
+\end{DoxyReturn}
+\Hypertarget{class_delivery_manager_acc3db81588d5ec2a563a88acb4674ef7}\label{class_delivery_manager_acc3db81588d5ec2a563a88acb4674ef7} 
+\index{DeliveryManager@{DeliveryManager}!minimumWeightPerfectMatching@{minimumWeightPerfectMatching}}
+\index{minimumWeightPerfectMatching@{minimumWeightPerfectMatching}!DeliveryManager@{DeliveryManager}}
+\doxysubsubsection{\texorpdfstring{minimumWeightPerfectMatching()}{minimumWeightPerfectMatching()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::pair}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*}, \mbox{\hyperlink{class_edge}{Edge}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ $>$ Delivery\+Manager\+::minimum\+Weight\+Perfect\+Matching (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ \&}]{odd\+Vertices }\end{DoxyParamCaption})}
+
+
+
+Find the Minimum Weight Perfect Matching (MWPM) for odd degree vertices. 
+
+This naive approach finds the MWPM by checking each pair of vertices and choosing the minimum weight edge connecting them.
+
+
+\begin{DoxyParams}{Parameters}
+{\em odd\+Vertices} & The vertices with odd degrees. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of pairs representing the matched vertices and their connecting edges. @complexity O(\+V\texorpdfstring{$^\wedge$}{\string^}2) 
+\end{DoxyReturn}
+\Hypertarget{class_delivery_manager_a7092bd6b733d06c9ee5426890165eb1e}\label{class_delivery_manager_a7092bd6b733d06c9ee5426890165eb1e} 
+\index{DeliveryManager@{DeliveryManager}!mstPrim@{mstPrim}}
+\index{mstPrim@{mstPrim}!DeliveryManager@{DeliveryManager}}
+\doxysubsubsection{\texorpdfstring{mstPrim()}{mstPrim()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ Delivery\+Manager\+::mst\+Prim (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&}]{g,  }\item[{\mbox{\hyperlink{class_edge}{int}}}]{start }\end{DoxyParamCaption})}
+
+
+
+Find the Minimum Spanning Tree (MST) using Prim\textquotesingle{}s algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph. \\
+\hline
+{\em start} & The starting vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of predecessors in the MST. @complexity O(\+E log V) 
+\end{DoxyReturn}
+\Hypertarget{class_delivery_manager_a1f7fdb55fc83d756c8ee5ab032dc0670}\label{class_delivery_manager_a1f7fdb55fc83d756c8ee5ab032dc0670} 
+\index{DeliveryManager@{DeliveryManager}!realtsp@{realtsp}}
+\index{realtsp@{realtsp}!DeliveryManager@{DeliveryManager}}
+\doxysubsubsection{\texorpdfstring{realtsp()}{realtsp()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::pair}}$<$ \mbox{\hyperlink{class_edge}{double}}, \mbox{\hyperlink{class_edge}{double}} $>$ Delivery\+Manager\+::realtsp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&}]{g,  }\item[{\mbox{\hyperlink{class_edge}{int}}}]{s }\end{DoxyParamCaption})}
+
+
+
+Exact approach to solve the Traveling Salesman Problem (TSP). 
+
+This method uses a similar approach as heuristic\+TSP but starts from a specified starting vertex. It finds an MST, then finds the MWPM for odd degree vertices in the MST, and finally forms an Eulerian graph. An Eulerian circuit is found and converted to a TSP path.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph representing the delivery network. \\
+\hline
+{\em s} & The starting vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pair containing the total cost of the TSP path and the time taken to compute it. @complexity O(V\texorpdfstring{$^\wedge$}{\string^}2 log V + V\texorpdfstring{$^\wedge$}{\string^}3), where V is the number of vertices in the graph. 
+\end{DoxyReturn}
+\Hypertarget{class_delivery_manager_a74e0aa66632e29bcfe1d5e18a45f0d33}\label{class_delivery_manager_a74e0aa66632e29bcfe1d5e18a45f0d33} 
+\index{DeliveryManager@{DeliveryManager}!tsp2Approximation@{tsp2Approximation}}
+\index{tsp2Approximation@{tsp2Approximation}!DeliveryManager@{DeliveryManager}}
+\doxysubsubsection{\texorpdfstring{tsp2Approximation()}{tsp2Approximation()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::pair}}$<$ \mbox{\hyperlink{class_edge}{double}}, \mbox{\hyperlink{class_edge}{double}} $>$ Delivery\+Manager\+::tsp2\+Approximation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::unique\+\_\+ptr}}$<$ \mbox{\hyperlink{class_graph}{Graph}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ $>$ \&}]{g }\end{DoxyParamCaption})}
+
+
+
+2-\/Approximation algorithm for solving the Traveling Salesman Problem (TSP). 
+
+This method uses a Minimum Spanning Tree (MST) followed by a depth-\/first search (DFS) to find a Hamiltonian circuit that approximates the TSP tour within a factor of 2.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph representing the delivery network. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pair containing the total cost of the approximate TSP tour and the time taken to compute it. @complexity O(\+V\texorpdfstring{$^\wedge$}{\string^}2 log V) 
+\end{DoxyReturn}
+\Hypertarget{class_delivery_manager_aa3139eb388ac4238eacb872ca25c644e}\label{class_delivery_manager_aa3139eb388ac4238eacb872ca25c644e} 
+\index{DeliveryManager@{DeliveryManager}!updateQueue@{updateQueue}}
+\index{updateQueue@{updateQueue}!DeliveryManager@{DeliveryManager}}
+\doxysubsubsection{\texorpdfstring{updateQueue()}{updateQueue()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_edge}{void}} Delivery\+Manager\+::update\+Queue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::priority\+\_\+queue}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::pair}}$<$ \mbox{\hyperlink{class_edge}{double}}, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$, \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::pair}}$<$ \mbox{\hyperlink{class_edge}{double}}, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ $>$, \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::greater}}$<$ \mbox{\hyperlink{class_edge_ab976213419283ed754f42f57b195a288}{std\+::pair}}$<$ \mbox{\hyperlink{class_edge}{double}}, \mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*} $>$ $>$ $>$ \&}]{V,  }\item[{\mbox{\hyperlink{class_edge}{double}}}]{w,  }\item[{\mbox{\hyperlink{class_vertex}{Vertex}}$<$ \mbox{\hyperlink{class_edge}{int}} $>$ \texorpdfstring{$\ast$}{*}}]{v }\end{DoxyParamCaption})}
+
+
+
+Update the priority queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em V} & The priority queue. \\
+\hline
+{\em w} & The weight. \\
+\hline
+{\em v} & The vertex. @complexity O(\+V) \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/jlsmp/\+Downloads/\+DA\+\_\+project2-\/master/\+DA\+\_\+project2-\/master/\mbox{\hyperlink{_delivery_manager_8h}{Delivery\+Manager.\+h}}\item 
+C\+:/\+Users/jlsmp/\+Downloads/\+DA\+\_\+project2-\/master/\+DA\+\_\+project2-\/master/\mbox{\hyperlink{_delivery_manager_8cpp}{Delivery\+Manager.\+cpp}}\end{DoxyCompactItemize}

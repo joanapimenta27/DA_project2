@@ -1,0 +1,74 @@
+\doxysection{Delivery\+Manager.\+h}
+\hypertarget{_delivery_manager_8h_source}{}\label{_delivery_manager_8h_source}\index{C:/Users/jlsmp/Downloads/DA\_project2-\/master/DA\_project2-\/master/DeliveryManager.h@{C:/Users/jlsmp/Downloads/DA\_project2-\/master/DA\_project2-\/master/DeliveryManager.h}}
+\mbox{\hyperlink{_delivery_manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ joana\ on\ 14-\/05-\/2024.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ DELIVERYMANAGER\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ DELIVERYMANAGER\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_graph_8h}{Graph.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_parser_8h}{Parser.h}}"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_haversine_8h}{Haversine.h}}"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_delivery_manager}{DeliveryManager}}\{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_delivery_manager_1_1vert__struct}{vert\_struct}}\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_delivery_manager_1_1vert__struct_afd84a2baf5d22aa1768057997bbefb1a}{operator()}}(\textcolor{keywordtype}{int}\ v)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \ v;}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_delivery_manager_1_1vert__struct_a7056cc4e4c836359e8b20c28ad516bff}{operator()}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\&\ v1,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\&\ v2)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ v1==v2;}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00024\ \ \ \ \ \};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ std::unordered\_map<int,\ Vertex<int>*,vert\_struct>vertex\_;}
+\DoxyCodeLine{00029\ \ \ \ \ std::unique\_ptr<Graph<int>>\ deliveryGraph\_\ \ ;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{class_delivery_manager_a2a75ff1c37600302ec61f5b38e82a778}{DeliveryManager}}(std::string\ data\_choice,\ std::string\ edge\_choice);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ std::unique\_ptr<Graph<int>>\&\ \mbox{\hyperlink{class_delivery_manager_a98a0ff568850483ea9996e0fe33b5efa}{getDeliveryGraph}}()\ ;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ std::pair<double,double>\ \mbox{\hyperlink{class_delivery_manager_a8e2f556aed7fb05b839dbbcba4b9f7c0}{backtracking}}(std::unique\_ptr<\mbox{\hyperlink{class_graph}{Graph<int>}}>\&\ g);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_delivery_manager_abbcd6351a900535ccf54b7f1baee8b95}{backtrack\_tsp}}(std::unique\_ptr<\mbox{\hyperlink{class_graph}{Graph<int>}}>\&\ g,\textcolor{keywordtype}{int}\ vis,\ \mbox{\hyperlink{class_vertex}{Vertex<int>}}*\ v,\textcolor{keywordtype}{double}\&\ res,\textcolor{keywordtype}{double}\ cost);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ std::pair<double,double>\ \mbox{\hyperlink{class_delivery_manager_a74e0aa66632e29bcfe1d5e18a45f0d33}{tsp2Approximation}}(std::unique\_ptr<\mbox{\hyperlink{class_graph}{Graph<int>}}>\&\ g);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ std::vector<int>\ \mbox{\hyperlink{class_delivery_manager_a7092bd6b733d06c9ee5426890165eb1e}{mstPrim}}(std::unique\_ptr<\mbox{\hyperlink{class_graph}{Graph<int>}}>\&\ g,\textcolor{keywordtype}{int}\ start);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_delivery_manager_a37519dfa5d98f311fc4149779cfbe25c}{dfsPrim}}(std::unique\_ptr<\mbox{\hyperlink{class_graph}{Graph<int>}}>\&\ g,\textcolor{keywordtype}{int}\ v,std::vector<int>\&\ res,std::vector<int>\ prim);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_delivery_manager_aa3139eb388ac4238eacb872ca25c644e}{updateQueue}}(\ std::priority\_queue<std::pair<\textcolor{keywordtype}{double},\ \mbox{\hyperlink{class_vertex}{Vertex<int>}}*>,\ std::vector<std::pair<\textcolor{keywordtype}{double},\ \mbox{\hyperlink{class_vertex}{Vertex<int>}}*>>,\ std::greater<std::pair<\textcolor{keywordtype}{double},\ \mbox{\hyperlink{class_vertex}{Vertex<int>}}*>>>\&\ V,\textcolor{keywordtype}{double}\ w,\ \mbox{\hyperlink{class_vertex}{Vertex<int>}}*\ v);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{class_edge}{Edge<int>}}\ *\ \mbox{\hyperlink{class_delivery_manager_af7f6f474d9a95b79d3d2f3a983a51c5b}{findEdge}}(std::unique\_ptr<\mbox{\hyperlink{class_graph}{Graph<int>}}>\&\ g,\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&in,\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&dest);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ std::vector<Vertex<int>\ *>\ \mbox{\hyperlink{class_delivery_manager_a7fcaf71c945bc552f1cca7676ff102e6}{findOddDegreeVertices}}(std::unique\_ptr<\mbox{\hyperlink{class_graph}{Graph<int>}}>\ \&g,\ \textcolor{keyword}{const}\ std::vector<int>\ \&mst);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ std::vector<std::pair<Vertex<int>*,\ \mbox{\hyperlink{class_edge}{Edge<int>}}*>>\ \mbox{\hyperlink{class_delivery_manager_acc3db81588d5ec2a563a88acb4674ef7}{minimumWeightPerfectMatching}}(std::vector<\mbox{\hyperlink{class_vertex}{Vertex<int>}}*>\&\ oddVertices);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ std::vector<Edge<int>\ *>\ \mbox{\hyperlink{class_delivery_manager_a9bb7c31d776777862d38e21cec217807}{combineMSTandMWPM}}(\textcolor{keyword}{const}\ std::vector<\mbox{\hyperlink{class_edge}{Edge<int>}}\ *>\ \&mstEdges,\ \textcolor{keyword}{const}\ std::vector<\mbox{\hyperlink{class_edge}{Edge<int>}}\ *>\ \&mwpmEdges);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_delivery_manager_aca156162b2253c64180ad2d332279712}{calculateTSPPath}}(\textcolor{keyword}{const}\ std::vector<int>\ \&\mbox{\hyperlink{class_delivery_manager_aaec8df91da23bb48afa05ce157084644}{eulerianCircuit}},\ std::unique\_ptr<\mbox{\hyperlink{class_graph}{Graph<int>}}>\ \&g,\textcolor{keyword}{const}\ std::vector<\mbox{\hyperlink{class_edge}{Edge<int>}}*>\&\ eulerianEdges);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ std::pair<double,double>\ \mbox{\hyperlink{class_delivery_manager_ab702053edeeaeabf91fafbc093e33b51}{heuristicTSP}}(std::unique\_ptr<\mbox{\hyperlink{class_graph}{Graph<int>}}>\ \&g);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ std::vector<int>\ \mbox{\hyperlink{class_delivery_manager_aaec8df91da23bb48afa05ce157084644}{eulerianCircuit}}(std::unique\_ptr<\mbox{\hyperlink{class_graph}{Graph<int>}}>\ \&g,\ \textcolor{keyword}{const}\ std::vector<\mbox{\hyperlink{class_edge}{Edge<int>}}\ *>\ \&eulerianEdges,\textcolor{keywordtype}{int}\ start);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ std::pair<double,double>\ \mbox{\hyperlink{class_delivery_manager_a1f7fdb55fc83d756c8ee5ab032dc0670}{realtsp}}(std::unique\_ptr<\mbox{\hyperlink{class_graph}{Graph<int>}}>\&\ g,\ \textcolor{keywordtype}{int}\ v);}
+\DoxyCodeLine{00064\ \};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//DELIVERYMANAGER\_H}}
+
+\end{DoxyCode}
